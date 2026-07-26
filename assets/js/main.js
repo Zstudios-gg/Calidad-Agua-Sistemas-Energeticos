@@ -214,58 +214,62 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================
-  // 9. CONTROLES DE LA ANIMACIÓN (PLAY / PAUSA / REINICIAR)
+  // 9. CONTROLES DEL VIDEO (PLAY / PAUSA / REINICIAR)
   // =========================================================
-  const panelSvg = document.getElementById('panel-svg');
+  const panelVideo = document.getElementById('mecanismo-video');
   const playBtn = document.getElementById('anim-play');
   const resetBtn = document.getElementById('anim-reset');
 
-  if (panelSvg && playBtn) {
+  // Bandera para no pisar la pausa manual del usuario con el autoplay del viewport
+  let manuallyPaused = false;
+
+  function updatePlayButton(isPlaying) {
+    if (!playBtn) return;
+    playBtn.setAttribute('aria-pressed', String(isPlaying));
+    playBtn.innerHTML = isPlaying
+      ? '<i class="ti ti-player-pause-filled"></i> Pausar'
+      : '<i class="ti ti-player-play-filled"></i> Reproducir';
+  }
+
+  if (panelVideo && playBtn) {
+    panelVideo.addEventListener('play', () => updatePlayButton(true));
+    panelVideo.addEventListener('pause', () => updatePlayButton(false));
+
     playBtn.addEventListener('click', () => {
-      const isPaused = panelSvg.classList.toggle('anim-paused');
-      playBtn.setAttribute('aria-pressed', String(!isPaused));
-      playBtn.innerHTML = isPaused
-        ? '<i class="ti ti-player-play-filled"></i> Reproducir'
-        : '<i class="ti ti-player-pause-filled"></i> Pausar';
-    });
-  }
-
-  if (panelSvg && resetBtn) {
-    resetBtn.addEventListener('click', () => {
-      // Forzar el reinicio de todas las animaciones CSS del SVG
-      panelSvg.classList.remove('anim-paused');
-      if (playBtn) {
-        playBtn.setAttribute('aria-pressed', 'true');
-        playBtn.innerHTML = '<i class="ti ti-player-pause-filled"></i> Pausar';
+      if (panelVideo.paused) {
+        manuallyPaused = false;
+        panelVideo.play();
+      } else {
+        manuallyPaused = true;
+        panelVideo.pause();
       }
-      const animatedParts = panelSvg.querySelectorAll(
-        '.cloud-group, .rain-group, .sun-system, .drop-main, .crystal-layer, .hotspot-layer'
-      );
-      animatedParts.forEach(el => {
-        el.style.animation = 'none';
-        void el.offsetHeight; // reflow forzado para reiniciar el keyframe
-        el.style.animation = '';
-      });
     });
   }
 
-  // Pausar la animación automáticamente cuando sale del viewport (evita autoplay agresivo continuo)
-  if (panelSvg && 'IntersectionObserver' in window) {
-    const svgObserver = new IntersectionObserver((entries) => {
+  if (panelVideo && resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      panelVideo.currentTime = 0;
+      manuallyPaused = false;
+      panelVideo.play();
+    });
+  }
+
+  // Reproducir automáticamente solo cuando la sección entra al viewport, y pausar al salir
+  if (panelVideo && 'IntersectionObserver' in window) {
+    const videoObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (!entry.isIntersecting && !panelSvg.classList.contains('anim-paused')) {
-          panelSvg.style.setProperty('--auto-paused', '1');
-          panelSvg.querySelectorAll(
-            '.cloud-group, .rain-group, .sun-system, .drop-main, .crystal-layer, .hotspot-layer'
-          ).forEach(el => { el.style.animationPlayState = 'paused'; });
-        } else if (entry.isIntersecting && !panelSvg.classList.contains('anim-paused')) {
-          panelSvg.querySelectorAll(
-            '.cloud-group, .rain-group, .sun-system, .drop-main, .crystal-layer, .hotspot-layer'
-          ).forEach(el => { el.style.animationPlayState = 'running'; });
+        if (entry.isIntersecting) {
+          if (!manuallyPaused) {
+            panelVideo.play().catch(() => {
+              // Autoplay bloqueado por el navegador; el usuario puede darle Play manualmente
+            });
+          }
+        } else {
+          panelVideo.pause();
         }
       });
     }, { threshold: 0.2 });
-    svgObserver.observe(panelSvg);
+    videoObserver.observe(panelVideo);
   }
 
   // =========================================================
