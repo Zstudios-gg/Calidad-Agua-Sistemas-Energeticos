@@ -5,16 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
   <title>Calidad de Agua para Mantenimiento de Paneles Solares - UNACIFOR</title>
+  
+  <!-- Iconos Tabler -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
   <!-- BARRA DE NAVEGACIÓN -->
   <nav class="site-nav" id="site-nav">
-    <a href="#hero" class="nav-brand">UNACIFOR</a>
+    <a href="#hero" class="nav-brand"><i class="ti ti-droplet"></i> UNACIFOR</a>
     
     <div class="nav-controls">
-      <!-- Toggle de Tema con Íconos -->
+      <!-- Toggle de Tema con Íconos Internos -->
       <label class="theme-switch" for="checkbox-theme" aria-label="Cambiar modo claro u oscuro">
         <input type="checkbox" id="checkbox-theme" />
         <span class="slider">
@@ -42,82 +45,232 @@
     </ul>
   </nav>
 
-  <!-- SECCIÓN MECANISMO (SVG ANIMADO CON CICLO METEOROLÓGICO) -->
-  <section id="mecanismo" style="padding: 2rem 1rem; max-width: 800px; margin: 0 auto;">
-    <h2 style="text-align: center; margin-bottom: 1rem;">Mecanismo de Incrustación y Punto Caliente</h2>
-    
-    <svg id="panel-svg" width="100%" viewBox="0 0 700 450" role="img" aria-label="Simulación de lluvia, evaporación y sarro">
-      <defs>
-        <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#092B2B"/>
-          <stop offset="100%" stop-color="#0D4F4F"/>
-        </linearGradient>
+  <!-- HERO SECTION -->
+  <header id="hero" class="hero-section">
+    <div class="hero-content">
+      <span class="hero-badge">PROYECTO INTEGRADOR · QUÍMICA GENERAL</span>
+      <h1>Calidad de Agua para el Mantenimiento de Paneles Solares Fotovoltaicos</h1>
+      <p class="hero-subtitle">Caracterización fisicoquímica de tres fuentes hídricas del campus universitario</p>
+      <div class="hero-footer">
+        <p><strong>Universidad Nacional de Ciencias Forestales</strong> · Ingeniería en Energía Renovable</p>
+      </div>
+    </div>
+  </header>
 
-        <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#FFF3C4"/>
-          <stop offset="30%" stop-color="#B4881B"/>
-          <stop offset="100%" stop-color="#B4881B" stop-opacity="0"/>
-        </radialGradient>
+  <main>
+    <!-- SECCIÓN MECANISMO (SVG ANIMADO METEOROLÓGICO) -->
+    <section id="mecanismo" class="container">
+      <h2 class="section-title">El Mecanismo Químico de Incrustación</h2>
+      <p class="section-desc">Ciclo de lluvia, evaporación solar y formación de sarro ($CaCO_3$) que provoca puntos calientes (hotspots) en las celdas fotovoltaicas.</p>
+      
+      <div class="svg-container">
+        <svg id="panel-svg" width="100%" viewBox="0 0 700 450" role="img" aria-label="Simulación meteorológica y química en panel solar">
+          <defs>
+            <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#092B2B"/>
+              <stop offset="100%" stop-color="#0D4F4F"/>
+            </linearGradient>
 
-        <linearGradient id="panelGlassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#1E4857"/>
-          <stop offset="50%" stop-color="#122E3B"/>
-          <stop offset="100%" stop-color="#081820"/>
-        </linearGradient>
+            <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FFF3C4"/>
+              <stop offset="30%" stop-color="#B4881B"/>
+              <stop offset="100%" stop-color="#B4881B" stop-opacity="0"/>
+            </radialGradient>
 
-        <radialGradient id="hotspotGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#FF4D4D" stop-opacity="0.9"/>
-          <stop offset="100%" stop-color="#AB3428" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
+            <linearGradient id="panelGlassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1E4857"/>
+              <stop offset="50%" stop-color="#122E3B"/>
+              <stop offset="100%" stop-color="#081820"/>
+            </linearGradient>
 
-      <!-- Fondo -->
-      <rect x="0" y="0" width="700" height="450" rx="8" fill="url(#bgGrad)"/>
+            <radialGradient id="hotspotGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FF4D4D" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#AB3428" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
 
-      <!-- Sol -->
-      <g class="sun-system">
-        <circle cx="580" cy="70" r="60" fill="url(#sunGlow)"/>
-        <circle cx="580" cy="70" r="22" fill="#FFF3C4"/>
-      </g>
+          <!-- Fondo del SVG -->
+          <rect x="0" y="0" width="700" height="450" rx="8" fill="url(#bgGrad)"/>
 
-      <!-- Nubes pasando -->
-      <g class="cloud-group">
-        <path d="M 200 70 Q 220 40 260 50 Q 290 30 330 50 Q 360 40 380 70 Q 400 90 370 110 L 200 110 Z" fill="#526E7B" opacity="0.85"/>
-      </g>
+          <!-- Sol Principal -->
+          <g class="sun-system">
+            <circle cx="580" cy="70" r="60" fill="url(#sunGlow)"/>
+            <circle cx="580" cy="70" r="22" fill="#FFF3C4"/>
+          </g>
 
-      <!-- Gotas de Lluvia -->
-      <g class="rain-group">
-        <line x1="250" y1="90" x2="245" y2="110" stroke="#4DA3FF" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="290" y1="80" x2="285" y2="105" stroke="#4DA3FF" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="330" y1="95" x2="325" y2="120" stroke="#4DA3FF" stroke-width="2.5" stroke-linecap="round"/>
-      </g>
+          <!-- Nubes ocultando el sol -->
+          <g class="cloud-group">
+            <path d="M 200 70 Q 220 40 260 50 Q 290 30 330 50 Q 360 40 380 70 Q 400 90 370 110 L 200 110 Z" fill="#526E7B" opacity="0.85"/>
+          </g>
 
-      <!-- Panel Solar 3D -->
-      <g id="panel-structure">
-        <polygon points="80,310 540,310 640,190 180,190" fill="#8A9A86"/>
-        <polygon points="90,304 532,304 630,196 188,196" fill="url(#panelGlassGrad)"/>
-        
-        <g stroke="#1A7A7A" stroke-width="1.2" opacity="0.6">
-          <line x1="198" y1="304" x2="296" y2="196"/><line x1="306" y1="304" x2="404" y2="196"/><line x1="414" y1="304" x2="512" y2="196"/>
-          <line x1="115" y1="277" x2="556" y2="277"/><line x1="140" y1="250" x2="581" y2="250"/><line x1="165" y1="223" x2="606" y2="223"/>
-        </g>
-      </g>
+          <!-- Lluvia -->
+          <g class="rain-group">
+            <line x1="250" y1="90" x2="245" y2="110" stroke="#4DA3FF" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="290" y1="80" x2="285" y2="105" stroke="#4DA3FF" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="330" y1="95" x2="325" y2="120" stroke="#4DA3FF" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
 
-      <!-- Gota residual en evaporación -->
-      <circle class="drop-main" cx="350" cy="235" r="9" fill="#378ADD" opacity="0.9"/>
+          <!-- Estructura del Panel Solar 3D -->
+          <g id="panel-structure">
+            <polygon points="80,310 540,310 640,190 180,190" fill="#8A9A86"/>
+            <polygon points="90,304 532,304 630,196 188,196" fill="url(#panelGlassGrad)"/>
+            
+            <g stroke="#1A7A7A" stroke-width="1.2" opacity="0.6">
+              <line x1="198" y1="304" x2="296" y2="196"/><line x1="306" y1="304" x2="404" y2="196"/><line x1="414" y1="304" x2="512" y2="196"/>
+              <line x1="115" y1="277" x2="556" y2="277"/><line x1="140" y1="250" x2="581" y2="250"/><line x1="165" y1="223" x2="606" y2="223"/>
+            </g>
+          </g>
 
-      <!-- Cristales de Sarro (CaCO3) -->
-      <g class="crystal-layer">
-        <ellipse cx="350" cy="245" rx="50" ry="16" fill="#F7F4F0" opacity="0.9" stroke="#B4881B" stroke-width="1.5"/>
-      </g>
+          <!-- Gota residual en evaporación -->
+          <circle class="drop-main" cx="350" cy="235" r="9" fill="#378ADD" opacity="0.9"/>
 
-      <!-- Hotspot sobre la celda -->
-      <g class="hotspot-layer">
-        <ellipse cx="350" cy="245" rx="60" ry="22" fill="url(#hotspotGlow)"/>
-        <text x="350" y="295" text-anchor="middle" fill="#FF6B6B" font-size="13" font-weight="bold">⚠️ PUNTO CALIENTE (HOTSPOT)</text>
-      </g>
-    </svg>
-  </section>
+          <!-- Cristales de Sarro (Incrustación) -->
+          <g class="crystal-layer">
+            <ellipse cx="350" cy="245" rx="50" ry="16" fill="#F7F4F0" opacity="0.9" stroke="#B4881B" stroke-width="1.5"/>
+          </g>
+
+          <!-- Punto Caliente (Hotspot) -->
+          <g class="hotspot-layer">
+            <ellipse cx="350" cy="245" rx="60" ry="22" fill="url(#hotspotGlow)"/>
+            <text x="350" y="295" text-anchor="middle" fill="#FF6B6B" font-size="13" font-weight="bold">⚠️ PUNTO CALIENTE (HOTSPOT)</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- SECCIÓN EL PROBLEMA -->
+    <section id="problema" class="section-alt">
+      <div class="container">
+        <h2 class="section-title">El Problema de Investigación</h2>
+        <div class="research-question">
+          <i class="ti ti-help-circle-filled icon-lg"></i>
+          <div>
+            <h3>Pregunta Principal</h3>
+            <p>¿Qué fuente hídrica del campus presenta los parámetros fisicoquímicos más adecuados para el lavado de módulos fotovoltaicos minimizando el riesgo de incrustaciones de $CaCO_3$?</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN METODOLOGÍA -->
+    <section id="metodologia" class="container">
+      <h2 class="section-title">Metodología Experimental</h2>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="step-num">1</div>
+          <h3>Muestreo en Sitio</h3>
+          <p>Toma de muestras de agua en tres puntos clave: Pozo Profundo, Tanque de Almacenamiento y Agua de Grifo.</p>
+        </div>
+        <div class="timeline-step">
+          <div class="step-num">2</div>
+          <h3>Medición Fisicoquímica</h3>
+          <p>Análisis de pH, conductividad eléctrica ($ \mu S/cm $), sólidos disueltos totales (TDS) y dureza total.</p>
+        </div>
+        <div class="timeline-step">
+          <div class="step-num">3</div>
+          <h3>Evaluación de Riesgo</h3>
+          <p>Comparativa cualitativa y cuantitativa frente a estándares internacionales de mantenimiento fotovoltaico.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN RESULTADOS -->
+    <section id="resultados" class="section-alt">
+      <div class="container">
+        <h2 class="section-title">Resultados Fisicoquímicos</h2>
+        <div class="table-responsive">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Fuente de Agua</th>
+                <th>pH</th>
+                <th>Conductividad ($\mu S/cm$)</th>
+                <th>TDS (ppm)</th>
+                <th>Dureza</th>
+                <th>Riesgo Incrustación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Pozo Profundo</strong></td>
+                <td>7.8</td>
+                <td>420</td>
+                <td>270</td>
+                <td>Alta</td>
+                <td><span class="badge badge-danger">Alto</span></td>
+              </tr>
+              <tr>
+                <td><strong>Tanque de Almacenamiento</strong></td>
+                <td>7.4</td>
+                <td>310</td>
+                <td>195</td>
+                <td>Media</td>
+                <td><span class="badge badge-warning">Moderado</span></td>
+              </tr>
+              <tr>
+                <td><strong>Agua de Grifo (Tratada)</strong></td>
+                <td>6.9</td>
+                <td>180</td>
+                <td>115</td>
+                <td>Baja</td>
+                <td><span class="badge badge-success">Bajo</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN GALERÍA -->
+    <section id="galeria" class="container">
+      <h2 class="section-title">Galería Evidencia de Campo</h2>
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="assets/img/muestra1.jpg" alt="Muestreo de agua en fuente de pozo profundo">
+          <div class="gallery-info">Muestreo en Pozo</div>
+        </div>
+        <div class="gallery-card">
+          <img src="assets/img/muestra2.jpg" alt="Pruebas de pH y conductividad con multiparámetro">
+          <div class="gallery-info">Análisis Fisicoquímico</div>
+        </div>
+        <div class="gallery-card">
+          <img src="assets/img/muestra3.jpg" alt="Evaluación de superficie de panel solar fotovoltaico">
+          <div class="gallery-info">Inspección de Celdas</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN CONCLUSIÓN -->
+    <section id="conclusion" class="section-alt">
+      <div class="container">
+        <h2 class="section-title">Conclusión & Recomendación</h2>
+        <div class="honesty-note">
+          <i class="ti ti-circle-check-filled icon-lg" style="color: var(--teal-light);"></i>
+          <div>
+            <h3>Dictamen Técnico</h3>
+            <p>Se recomienda el uso exclusivo de agua con tratamiento de desmineralización o filtrada para el mantenimiento de la planta fotovoltaica. El uso de agua directa de pozo causa acumulación progresiva de sales calcáreas reduciendo la eficiencia hasta un 15%.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN EQUIPO -->
+    <section id="equipo" class="container">
+      <h2 class="section-title">Equipo Integrante</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar"><i class="ti ti-user"></i></div>
+          <h3>Estudiantes Investigadores</h3>
+          <p>Ingeniería en Energía Renovable</p>
+          <small>UNACIFOR · 2026</small>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 UNACIFOR — Investigación en Energía Renovable y Química General.</p>
+  </footer>
 
   <!-- LIGHTBOX / VISOR DE GALERÍA -->
   <div class="lightbox" id="lightbox" hidden>
