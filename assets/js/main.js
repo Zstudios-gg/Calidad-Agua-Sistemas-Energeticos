@@ -213,4 +213,195 @@ document.addEventListener('DOMContentLoaded', () => {
     window.MathJax.typesetPromise();
   }
 
+  // =========================================================
+  // 9. CONTROLES DE LA ANIMACIÓN (PLAY / PAUSA / REINICIAR)
+  // =========================================================
+  const panelSvg = document.getElementById('panel-svg');
+  const playBtn = document.getElementById('anim-play');
+  const resetBtn = document.getElementById('anim-reset');
+
+  if (panelSvg && playBtn) {
+    playBtn.addEventListener('click', () => {
+      const isPaused = panelSvg.classList.toggle('anim-paused');
+      playBtn.setAttribute('aria-pressed', String(!isPaused));
+      playBtn.innerHTML = isPaused
+        ? '<i class="ti ti-player-play-filled"></i> Reproducir'
+        : '<i class="ti ti-player-pause-filled"></i> Pausar';
+    });
+  }
+
+  if (panelSvg && resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      // Forzar el reinicio de todas las animaciones CSS del SVG
+      panelSvg.classList.remove('anim-paused');
+      if (playBtn) {
+        playBtn.setAttribute('aria-pressed', 'true');
+        playBtn.innerHTML = '<i class="ti ti-player-pause-filled"></i> Pausar';
+      }
+      const animatedParts = panelSvg.querySelectorAll(
+        '.cloud-group, .rain-group, .sun-system, .drop-main, .crystal-layer, .hotspot-layer'
+      );
+      animatedParts.forEach(el => {
+        el.style.animation = 'none';
+        void el.offsetHeight; // reflow forzado para reiniciar el keyframe
+        el.style.animation = '';
+      });
+    });
+  }
+
+  // Pausar la animación automáticamente cuando sale del viewport (evita autoplay agresivo continuo)
+  if (panelSvg && 'IntersectionObserver' in window) {
+    const svgObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting && !panelSvg.classList.contains('anim-paused')) {
+          panelSvg.style.setProperty('--auto-paused', '1');
+          panelSvg.querySelectorAll(
+            '.cloud-group, .rain-group, .sun-system, .drop-main, .crystal-layer, .hotspot-layer'
+          ).forEach(el => { el.style.animationPlayState = 'paused'; });
+        } else if (entry.isIntersecting && !panelSvg.classList.contains('anim-paused')) {
+          panelSvg.querySelectorAll(
+            '.cloud-group, .rain-group, .sun-system, .drop-main, .crystal-layer, .hotspot-layer'
+          ).forEach(el => { el.style.animationPlayState = 'running'; });
+        }
+      });
+    }, { threshold: 0.2 });
+    svgObserver.observe(panelSvg);
+  }
+
+  // =========================================================
+  // 10. GRÁFICOS DE BARRAS NATIVOS EN CANVAS (SIN CHART.JS)
+  // =========================================================
+  function drawBarChart(canvasId, labels, values, colors, unitLabel, refLine) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const cssWidth = canvas.clientWidth || 380;
+    const cssHeight = 260;
+    canvas.width = cssWidth * dpr;
+    canvas.height = cssHeight * dpr;
+    ctx.scale(dpr, dpr);
+
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const textColor = isDark ? '#EAEAEA' : '#2A2A2A';
+    const gridColor = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(13,79,79,0.12)';
+
+    const padding = { top: 20, right: 15, bottom: 40, left: 45 };
+    const chartW = cssWidth - padding.left - padding.right;
+    const chartH = cssHeight - padding.top - padding.bottom;
+    const maxVal = Math.max(...values, refLine || 0) * 1.15 || 1;
+
+    ctx.clearRect(0, 0, cssWidth, cssHeight);
+
+    // Ejes / grid
+    ctx.strokeStyle = gridColor;
+    ctx.fillStyle = textColor;
+    ctx.font = '10px system-ui, sans-serif';
+    ctx.textAlign = 'right';
+    const steps = 4;
+    for (let i = 0; i <= steps; i++) {
+      const y = padding.top + chartH - (chartH * i) / steps;
+      const val = (maxVal * i) / steps;
+      ctx.beginPath();
+      ctx.moveTo(padding.left, y);
+      ctx.lineTo(padding.left + chartW, y);
+      ctx.stroke();
+      ctx.fillText(val.toFixed(1), padding.left - 6, y + 3);
+    }
+
+    // Línea de referencia (rango aceptable) si aplica
+    if (refLine !== undefined && refLine !== null) {
+      const yRef = padding.top + chartH - (chartH * refLine) / maxVal;
+      ctx.save();
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = '#AB3428';
+      ctx.beginPath();
+      ctx.moveTo(padding.left, yRef);
+      ctx.lineTo(padding.left + chartW, yRef);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Barras
+    const barSlot = chartW / labels.length;
+    const barWidth = barSlot * 0.5;
+    labels.forEach((label, i) => {
+      const val = values[i];
+      const barHeight = (val / maxVal) * chartH;
+      const x = padding.left + barSlot * i + (barSlot - barWidth) / 2;
+      const y = padding.top + chartH - barHeight;
+
+      ctx.fillStyle = colors[i] || '#1A7A7A';
+      ctx.fillRect(x, y, barWidth, barHeight);
+
+      // Valor encima de la barra
+      ctx.fillStyle = textColor;
+      ctx.textAlign = 'center';
+      ctx.font = 'bold 11px system-ui, sans-serif';
+      ctx.fillText(val.toFixed(2).replace(/\.00$/, ''), x + barWidth / 2, y - 6);
+
+      // Etiqueta del eje X
+      ctx.font = '10px system-ui, sans-serif';
+      ctx.fillText(label, x + barWidth / 2, padding.top + chartH + 16);
+    });
+
+    if (unitLabel) {
+      ctx.save();
+      ctx.translate(12, padding.top + chartH / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.textAlign = 'center';
+      ctx.font = '10px system-ui, sans-serif';
+      ctx.fillStyle = textColor;
+      ctx.fillText(unitLabel, 0, 0);
+      ctx.restore();
+    }
+  }
+
+  function renderCharts() {
+    drawBarChart(
+      'chart-conductividad',
+      ['Lluvia', 'Grifo', 'Purificada'],
+      [0.12, 0.10, 0.00],
+      ['#1A7A7A', '#0D4F4F', '#B4881B'],
+      'mS/cm'
+    );
+    drawBarChart(
+      'chart-ph',
+      ['Lluvia', 'Grifo', 'Purificada'],
+      [8.1, 6.7, 6.2],
+      ['#1A7A7A', '#0D4F4F', '#B4881B'],
+      'pH',
+      7.0
+    );
+  }
+
+  renderCharts();
+  window.addEventListener('resize', () => {
+    clearTimeout(window._chartResizeTimer);
+    window._chartResizeTimer = setTimeout(renderCharts, 200);
+  });
+  // Redibujar con los colores correctos al cambiar de tema
+  if (toggleSwitch) {
+    toggleSwitch.addEventListener('change', renderCharts);
+  }
+
+  // =========================================================
+  // 11. SWIPE TÁCTIL EN EL LIGHTBOX (GALERÍA)
+  // =========================================================
+  if (lightbox) {
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      const delta = touchEndX - touchStartX;
+      if (Math.abs(delta) > 40) {
+        if (delta < 0) openLightbox(currentIndex + 1); // swipe izquierda -> siguiente
+        else openLightbox(currentIndex - 1); // swipe derecha -> anterior
+      }
+    }, { passive: true });
+  }
+
 });
