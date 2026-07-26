@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // =========================================================
-  // 1. CONTROL DE MODO CLARO / MODO OSCURO (PERSISTENCIA Y SWITCH)
+  // 1. CONTROL DE MODO CLARO / MODO OSCURO
   // =========================================================
   const toggleSwitch = document.querySelector('#checkbox-theme');
   const currentTheme = localStorage.getItem('theme');
@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Sombra dinámica en Navbar al hacer Scroll
   window.addEventListener('scroll', () => {
     if (siteNav) {
       if (window.scrollY > 20) {
@@ -94,30 +93,38 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================
-  // 4. ANIMACIÓN DEL SVG Y INTERSECTIONS OBSERVER
+  // 4. AUTO-SCROLL INDICADOR EN TABLA MÓVIL
   // =========================================================
-  const panelSvg = document.getElementById('panel-svg');
-
-  if (panelSvg) {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.3
-    };
-
-    const svgObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          panelSvg.classList.add('animate-svg');
-        }
-      });
-    }, observerOptions);
-
-    svgObserver.observe(panelSvg);
+  const tableContainer = document.getElementById('results-table-container');
+  if (tableContainer) {
+    setTimeout(() => {
+      if (tableContainer.scrollWidth > tableContainer.clientWidth) {
+        tableContainer.scrollTo({
+          left: 70,
+          behavior: 'smooth'
+        });
+        setTimeout(() => {
+          tableContainer.scrollTo({
+            left: 0,
+            behavior: 'smooth'
+          });
+        }, 800);
+      }
+    }, 1500);
   }
 
   // =========================================================
-  // 5. VISOR DE GALERÍA DE IMÁGENES (LIGHTBOX MODAL)
+  // 5. INTERACTIVIDAD EN SECCIÓN DE EQUIPO
+  // =========================================================
+  const teamCardInteractive = document.getElementById('team-toggle-card');
+  if (teamCardInteractive) {
+    teamCardInteractive.addEventListener('click', () => {
+      teamCardInteractive.classList.toggle('is-expanded');
+    });
+  }
+
+  // =========================================================
+  // 6. VISOR DE GALERÍA DE IMÁGENES (LIGHTBOX MODAL)
   // =========================================================
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
@@ -176,17 +183,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // RESPALDO SI LAS IMÁGENES NO CARGAN EN GITHUB
-  galleryImages.forEach(img => {
-    img.addEventListener('error', function() {
-      this.src = 'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=600&q=80';
-    });
-  });
-
   // =========================================================
-  // 6. ANIMACIÓN DE APARICIÓN DE ELEMENTOS (FADE-IN ON SCROLL)
+  // 7. ANIMACIONES DE APARICIÓN (FADE-IN ON SCROLL)
   // =========================================================
-  const animatedElements = document.querySelectorAll('.timeline-step, .research-question, .honesty-note, .chart-card, .team-card');
+  const animatedElements = document.querySelectorAll('.timeline-step, .research-question, .honesty-note, .team-card, .references-card');
 
   if ('IntersectionObserver' in window) {
     const fadeObserver = new IntersectionObserver((entries, observer) => {
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================
-  // 7. SOPORTE DE RE-RENDERIZADO DE MATHJAX
+  // 8. SOPORTE DE RE-RENDERIZADO DE MATHJAX
   // =========================================================
   if (window.MathJax && window.MathJax.typesetPromise) {
     window.MathJax.typesetPromise();
