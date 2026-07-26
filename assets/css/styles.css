@@ -194,7 +194,7 @@ input:checked + .slider:before {
   color: var(--gold-light);
 }
 
-/* RESPONSIVE: MENÚ MÓVIL CON FONDO SÓLIDO (Evita solapamiento) */
+/* RESPONSIVE: MENÚ MÓVIL */
 @media (max-width: 820px) {
   .nav-toggle {
     display: flex;
@@ -202,11 +202,11 @@ input:checked + .slider:before {
 
   .nav-links {
     position: fixed;
-    top: 55px; /* Inicia justo debajo del navbar */
+    top: 55px;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #072222 !important; /* Opaco 100% libre de transparencias */
+    background-color: #072222 !important;
     flex-direction: column;
     align-items: flex-start;
     padding: 2.5rem 2rem;
@@ -494,7 +494,7 @@ input:checked + .slider:before {
 .lightbox img {
   max-width: 90vw;
   max-height: 75vh;
-  object-fit: contain; /* Garantiza adaptación perfecta sin recortes ni zoom excesivo */
+  object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 5px 25px rgba(0,0,0,0.8);
 }
@@ -633,7 +633,6 @@ input:checked + .slider:before {
   100% { opacity: 0.4; }
 }
 
-/* Clases asociadas a las animaciones del SVG */
 .cloud-group { animation: cloudCycle 10s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
 .rain-group { animation: rainCycle 10s linear infinite; }
 .sun-system { animation: sunHide 10s ease-in-out infinite; }
@@ -651,6 +650,6 @@ input:checked + .slider:before {
 }
 
 .fade-in-visible {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
