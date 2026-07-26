@@ -9,6 +9,16 @@
   <!-- Iconos Tabler -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
+
+  <!-- Motor MathJax para renderizar fórmulas químicas/matemáticas -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -164,7 +174,7 @@
         <div class="timeline-step">
           <div class="step-num">2</div>
           <h3>Medición Fisicoquímica</h3>
-          <p>Análisis de pH, conductividad eléctrica ($ \mu S/cm $), sólidos disueltos totales (TDS) y dureza total.</p>
+          <p>Análisis de pH, conductividad eléctrica ($\mu S/cm$), sólidos disueltos totales (TDS) y dureza total.</p>
         </div>
         <div class="timeline-step">
           <div class="step-num">3</div>
@@ -269,7 +279,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 UNACIFOR — Investigación en Energía Renovable y Química General.</p>
+    <p>© 2026 UNACIFOR — Investigación en Ing. Energía Renovable de la clase de Química .</p>
   </footer>
 
   <!-- LIGHTBOX / VISOR DE GALERÍA -->
