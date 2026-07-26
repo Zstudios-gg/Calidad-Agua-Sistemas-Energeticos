@@ -684,60 +684,28 @@ input:checked + .slider:before {
 [data-theme="dark"] .anim-btn { color: var(--gold-light); border-color: var(--gold-light); }
 [data-theme="dark"] .anim-btn:hover, [data-theme="dark"] .anim-btn:active { background-color: var(--gold-light); color: #0A1919; }
 
-/* Pausa global de las animaciones del SVG cuando el usuario lo solicita o cuando sale del viewport */
-#panel-svg.anim-paused .cloud-group,
-#panel-svg.anim-paused .rain-group,
-#panel-svg.anim-paused .sun-system,
-#panel-svg.anim-paused .drop-main,
-#panel-svg.anim-paused .crystal-layer,
-#panel-svg.anim-paused .hotspot-layer {
-  animation-play-state: paused;
+/* Video del mecanismo (reemplaza la animación SVG anterior) */
+.mecanismo-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: #0A1919; /* evita flash blanco mientras carga */
 }
 
-@keyframes cloudCycle {
-  0% { transform: translateX(-120px); opacity: 0; }
-  15% { opacity: 0.9; }
-  50% { transform: translateX(220px); opacity: 0.9; }
-  70% { opacity: 0; }
-  100% { transform: translateX(500px); opacity: 0; }
+/* Infografía posterior al video */
+.infografia-container {
+  max-width: 750px;
+  margin: 1.5rem auto 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-@keyframes rainCycle {
-  0%, 20% { opacity: 0; transform: translateY(-10px); }
-  30%, 45% { opacity: 1; transform: translateY(140px); }
-  55%, 100% { opacity: 0; transform: translateY(160px); }
+.infografia-container img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
-
-@keyframes sunHide {
-  0%, 10% { opacity: 1; }
-  25%, 50% { opacity: 0.35; }
-  65%, 100% { opacity: 1; }
-}
-
-@keyframes dropEvaporate {
-  0%, 45% { opacity: 0; transform: scale(0); }
-  55% { opacity: 1; transform: scale(1); }
-  75% { opacity: 0.8; transform: scale(0.6); }
-  85%, 100% { opacity: 0; transform: scale(0); }
-}
-
-@keyframes crystalForm {
-  0%, 65% { opacity: 0; transform: scale(0.5); }
-  80%, 100% { opacity: 0.95; transform: scale(1); }
-}
-
-/* Animación Suave del Hotspot (Sin parpadeo agresivo) */
-@keyframes hotspotSteady {
-  0%, 70% { opacity: 0; }
-  85%, 100% { opacity: 0.9; }
-}
-
-.cloud-group { animation: cloudCycle 10s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
-.rain-group { animation: rainCycle 10s linear infinite; }
-.sun-system { animation: sunHide 10s ease-in-out infinite; }
-.drop-main { transform-origin: 350px 235px; animation: dropEvaporate 10s ease-in-out infinite; }
-.crystal-layer { transform-origin: 350px 245px; animation: crystalForm 10s ease-in-out infinite; }
-.hotspot-layer { transform-origin: 350px 245px; animation: hotspotSteady 10s ease-in-out infinite; }
 
 /* =========================================================
    11. CLASES AUXILIARES SCROLL (FADE-IN)
