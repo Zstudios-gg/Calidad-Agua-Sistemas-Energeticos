@@ -176,6 +176,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // RESPALDO SI LAS IMÁGENES NO CARGAN EN GITHUB
+  galleryImages.forEach(img => {
+    img.addEventListener('error', function() {
+      this.src = 'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=600&q=80';
+    });
+  });
+
   // =========================================================
   // 6. ANIMACIÓN DE APARICIÓN DE ELEMENTOS (FADE-IN ON SCROLL)
   // =========================================================
@@ -195,13 +202,15 @@ document.addEventListener('DOMContentLoaded', () => {
       el.classList.add('fade-in-prepared');
       fadeObserver.observe(el);
     });
+  } else {
+    animatedElements.forEach(el => el.style.opacity = '1');
   }
 
   // =========================================================
-  // 7. SOPORTE DE RE-RENDERIZADO DE MATHJAX (SI APLICA)
+  // 7. SOPORTE DE RE-RENDERIZADO DE MATHJAX
   // =========================================================
-  if (window.MathJax) {
-    window.MathJax.typesetPromise && window.MathJax.typesetPromise();
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    window.MathJax.typesetPromise();
   }
 
 });
