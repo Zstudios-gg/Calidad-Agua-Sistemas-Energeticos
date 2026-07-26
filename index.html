@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
 
-  <!-- Motor MathJax para renderizar fórmulas químicas/matemáticas -->
+  <!-- Motor MathJax para renderizar fórmulas matemáticas/químicas -->
   <script>
     window.MathJax = {
       tex: {
@@ -45,12 +45,13 @@
     </div>
 
     <ul class="nav-links" id="nav-links">
-      <li><a href="#mecanismo">El mecanismo</a></li>
-      <li><a href="#problema">El problema</a></li>
+      <li><a href="#mecanismo">Mecanismo</a></li>
+      <li><a href="#problema">Problema</a></li>
       <li><a href="#metodologia">Metodología</a></li>
       <li><a href="#resultados">Resultados</a></li>
       <li><a href="#galeria">Galería</a></li>
       <li><a href="#conclusion">Conclusión</a></li>
+      <li><a href="#referencias">Referencias</a></li>
       <li><a href="#equipo">Equipo</a></li>
     </ul>
   </nav>
@@ -60,7 +61,14 @@
     <div class="hero-content">
       <span class="hero-badge">PROYECTO INTEGRADOR · QUÍMICA GENERAL</span>
       <h1>Calidad de Agua para el Mantenimiento de Paneles Solares Fotovoltaicos</h1>
-      <p class="hero-subtitle">Caracterización fisicoquímica de tres fuentes hídricas del campus universitario</p>
+      <p class="hero-subtitle">Caracterización fisicoquímica de tres fuentes hídricas del campus universitario y su impacto en la eficiencia energética.</p>
+      
+      <div class="hero-actions">
+        <a href="informe-final.pdf" download class="btn-download">
+          <i class="ti ti-file-download"></i> Descargar Informe Final (PDF)
+        </a>
+      </div>
+
       <div class="hero-footer">
         <p><strong>Universidad Nacional de Ciencias Forestales</strong> · Ingeniería en Energía Renovable</p>
       </div>
@@ -68,10 +76,10 @@
   </header>
 
   <main>
-    <!-- SECCIÓN MECANISMO (SVG ANIMADO METEOROLÓGICO) -->
+    <!-- SECCIÓN MECANISMO (SVG EXPLICATIVO ANIMADO) -->
     <section id="mecanismo" class="container">
-      <h2 class="section-title">El Mecanismo Químico de Incrustación</h2>
-      <p class="section-desc">Ciclo de lluvia, evaporación solar y formación de sarro ($CaCO_3$) que provoca puntos calientes (hotspots) en las celdas fotovoltaicas.</p>
+      <h2 class="section-title">Mecanismo Químico de Incrustación y Hotspots</h2>
+      <p class="section-desc">Explicación del ciclo: El agua dura con iones $Ca^{2+}$ y $Mg^{2+}$ depositada durante el lavado o lluvia se evapora por la radiación solar, dejando cristales de carbonato de calcio ($CaCO_3$). Esta capa opaca bloquea los fotones y genera sombreado focalizado, elevando la temperatura hasta crear un punto caliente (Hotspot) que degrada la celda fotovoltaica.</p>
       
       <div class="svg-container">
         <svg id="panel-svg" width="100%" viewBox="0 0 700 450" role="img" aria-label="Simulación meteorológica y química en panel solar">
@@ -108,19 +116,19 @@
             <circle cx="580" cy="70" r="22" fill="#FFF3C4"/>
           </g>
 
-          <!-- Nubes ocultando el sol -->
+          <!-- Nubes -->
           <g class="cloud-group">
             <path d="M 200 70 Q 220 40 260 50 Q 290 30 330 50 Q 360 40 380 70 Q 400 90 370 110 L 200 110 Z" fill="#526E7B" opacity="0.85"/>
           </g>
 
-          <!-- Lluvia -->
+          <!-- Lluvia / Lavado -->
           <g class="rain-group">
             <line x1="250" y1="90" x2="245" y2="110" stroke="#4DA3FF" stroke-width="2.5" stroke-linecap="round"/>
             <line x1="290" y1="80" x2="285" y2="105" stroke="#4DA3FF" stroke-width="2.5" stroke-linecap="round"/>
             <line x1="330" y1="95" x2="325" y2="120" stroke="#4DA3FF" stroke-width="2.5" stroke-linecap="round"/>
           </g>
 
-          <!-- Estructura del Panel Solar 3D -->
+          <!-- Estructura del Panel Solar -->
           <g id="panel-structure">
             <polygon points="80,310 540,310 640,190 180,190" fill="#8A9A86"/>
             <polygon points="90,304 532,304 630,196 188,196" fill="url(#panelGlassGrad)"/>
@@ -134,14 +142,15 @@
           <!-- Gota residual en evaporación -->
           <circle class="drop-main" cx="350" cy="235" r="9" fill="#378ADD" opacity="0.9"/>
 
-          <!-- Cristales de Sarro (Incrustación) -->
+          <!-- Cristales de Sarro (Incrustación de CaCO3) -->
           <g class="crystal-layer">
-            <ellipse cx="350" cy="245" rx="50" ry="16" fill="#F7F4F0" opacity="0.9" stroke="#B4881B" stroke-width="1.5"/>
+            <ellipse cx="350" cy="245" rx="50" ry="16" fill="#F7F4F0" opacity="0.95" stroke="#B4881B" stroke-width="1.5"/>
+            <text x="350" y="249" text-anchor="middle" fill="#2A2A2A" font-size="10" font-weight="bold">CaCO₃</text>
           </g>
 
-          <!-- Punto Caliente (Hotspot) -->
+          <!-- Punto Caliente (Hotspot) - CORREGIDO SIN PARPADEO AGRESIVO -->
           <g class="hotspot-layer">
-            <ellipse cx="350" cy="245" rx="60" ry="22" fill="url(#hotspotGlow)"/>
+            <ellipse cx="350" cy="245" rx="65" ry="24" fill="url(#hotspotGlow)"/>
             <text x="350" y="295" text-anchor="middle" fill="#FF6B6B" font-size="13" font-weight="bold">⚠️ PUNTO CALIENTE (HOTSPOT)</text>
           </g>
         </svg>
@@ -156,7 +165,7 @@
           <i class="ti ti-help-circle-filled icon-lg"></i>
           <div>
             <h3>Pregunta Principal</h3>
-            <p>¿Qué fuente hídrica del campus presenta los parámetros fisicoquímicos más adecuados para el lavado de módulos fotovoltaicos minimizando el riesgo de incrustaciones de $CaCO_3$?</p>
+            <p>¿Qué fuente hídrica del campus presenta los parámetros fisicoquímicos más adecuados para el lavado de módulos fotovoltaicos minimizando el riesgo de incrustaciones de $CaCO_3$ y pérdida de eficiencia?</p>
           </div>
         </div>
       </div>
@@ -169,17 +178,17 @@
         <div class="timeline-step">
           <div class="step-num">1</div>
           <h3>Muestreo en Sitio</h3>
-          <p>Toma de muestras de agua en tres puntos clave: Pozo Profundo, Tanque de Almacenamiento y Agua de Grifo.</p>
+          <p>Toma de muestras de agua en tres fuentes: Pozo Profundo, Tanque de Almacenamiento y Agua de Grifo del campus UNACIFOR.</p>
         </div>
         <div class="timeline-step">
           <div class="step-num">2</div>
           <h3>Medición Fisicoquímica</h3>
-          <p>Análisis de pH, conductividad eléctrica ($\mu S/cm$), sólidos disueltos totales (TDS) y dureza total.</p>
+          <p>Análisis multiparámetro de pH, conductividad eléctrica ($\mu S/cm$), sólidos disueltos totales (TDS) y dureza total.</p>
         </div>
         <div class="timeline-step">
           <div class="step-num">3</div>
-          <h3>Evaluación de Riesgo</h3>
-          <p>Comparativa cualitativa y cuantitativa frente a estándares internacionales de mantenimiento fotovoltaico.</p>
+          <h3>Evaluación y Comparativa</h3>
+          <p>Contraste de parámetros cuantitativos frente a las recomendaciones técnicas internacionales para mantenimiento de sistemas fotovoltaicos.</p>
         </div>
       </div>
     </section>
@@ -188,7 +197,9 @@
     <section id="resultados" class="section-alt">
       <div class="container">
         <h2 class="section-title">Resultados Fisicoquímicos</h2>
-        <div class="table-responsive">
+        <p class="section-desc">Desliza horizontalmente la tabla para ver todos los parámetros analizados:</p>
+        
+        <div class="table-responsive" id="results-table-container">
           <table class="results-table">
             <thead>
               <tr>
@@ -196,8 +207,8 @@
                 <th>pH</th>
                 <th>Conductividad ($\mu S/cm$)</th>
                 <th>TDS (ppm)</th>
-                <th>Dureza</th>
-                <th>Riesgo Incrustación</th>
+                <th>Dureza Total</th>
+                <th>Riesgo de Incrustación</th>
               </tr>
             </thead>
             <tbody>
@@ -206,7 +217,7 @@
                 <td>7.8</td>
                 <td>420</td>
                 <td>270</td>
-                <td>Alta</td>
+                <td>Alta ($Ca^{2+}, Mg^{2+}$)</td>
                 <td><span class="badge badge-danger">Alto</span></td>
               </tr>
               <tr>
@@ -214,7 +225,7 @@
                 <td>7.4</td>
                 <td>310</td>
                 <td>195</td>
-                <td>Media</td>
+                <td>Moderada</td>
                 <td><span class="badge badge-warning">Moderado</span></td>
               </tr>
               <tr>
@@ -233,7 +244,7 @@
 
     <!-- SECCIÓN GALERÍA -->
     <section id="galeria" class="container">
-      <h2 class="section-title">Galería Evidencia de Campo</h2>
+      <h2 class="section-title">Galería y Evidencia de Campo</h2>
       <div class="gallery-grid">
         <div class="gallery-card">
           <img src="assets/img/muestra1.jpg" alt="Muestreo de agua en fuente de pozo profundo">
@@ -253,33 +264,83 @@
     <!-- SECCIÓN CONCLUSIÓN -->
     <section id="conclusion" class="section-alt">
       <div class="container">
-        <h2 class="section-title">Conclusión & Recomendación</h2>
+        <h2 class="section-title">Conclusión & Dictamen Técnico</h2>
         <div class="honesty-note">
           <i class="ti ti-circle-check-filled icon-lg" style="color: var(--teal-light);"></i>
           <div>
-            <h3>Dictamen Técnico</h3>
-            <p>Se recomienda el uso exclusivo de agua con tratamiento de desmineralización o filtrada para el mantenimiento de la planta fotovoltaica. El uso de agua directa de pozo causa acumulación progresiva de sales calcáreas reduciendo la eficiencia hasta un 15%.</p>
+            <h3>Recomendación de Lavado</h3>
+            <p>Se concluye que el agua de pozo directo <strong>no es apta</strong> para el lavado continuo sin un tratamiento previo de desmineralización o ablandamiento. Se recomienda priorizar el uso de agua tratada o filtrada para preservar la transmitancia del cristal fotovoltaico y evitar pérdidas de generación eléctrica.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECCIÓN EQUIPO -->
-    <section id="equipo" class="container">
-      <h2 class="section-title">Equipo Integrante</h2>
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="team-avatar"><i class="ti ti-user"></i></div>
-          <h3>Estudiantes Investigadores</h3>
-          <p>Ingeniería en Energía Renovable</p>
-          <small>UNACIFOR · 2026</small>
+    <!-- SECCIÓN REFERENCIAS Y BIBLIOGRAFÍA -->
+    <section id="referencias" class="container">
+      <h2 class="section-title">Referencias y Bibliografía</h2>
+      <div class="references-card">
+        <ul class="references-list">
+          <li>
+            <i class="ti ti-book"></i>
+            <span><strong>ASTM D1125-14:</strong> Standard Test Methods for Electrical Conductivity and Resistivity of Water. ASTM International.</span>
+          </li>
+          <li>
+            <i class="ti ti-book"></i>
+            <span><strong>IEC 61215-2:</strong> Terrestrial photovoltaic (PV) modules - Design qualification and type approval - Test procedures. International Electrotechnical Commission.</span>
+          </li>
+          <li>
+            <i class="ti ti-book"></i>
+            <span><strong>Skoog, D. A., West, D. M., & Holler, F. J.:</strong> Fundamentos de Química Analítica. Edición Hispanoamericana, McGraw-Hill.</span>
+          </li>
+          <li>
+            <i class="ti ti-book"></i>
+            <span><strong>NREL (National Renewable Energy Laboratory):</strong> Best Practices for Operation and Maintenance of Photovoltaic Systems.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECCIÓN EQUIPO INTEGRANTE Y CATEDRÁTICA -->
+    <section id="equipo" class="section-alt">
+      <div class="container">
+        <h2 class="section-title">Equipo Integrante y Docente</h2>
+        <p class="section-desc">Haz clic o toca la tarjeta para desplegar el listado completo de estudiantes:</p>
+        
+        <div class="team-wrapper">
+          <!-- Tarjeta Interactiva del Estudiantes -->
+          <div class="team-card-interactive" id="team-toggle-card">
+            <div class="team-card-header">
+              <div class="team-avatar"><i class="ti ti-users"></i></div>
+              <h3>Estudiantes Investigadores</h3>
+              <p>Ingeniería en Energía Renovable</p>
+              <span class="tap-hint"><i class="ti ti-pointer"></i> Tocar para ver integrantes</span>
+            </div>
+            
+            <div class="team-list-container" id="team-list">
+              <ul class="students-list">
+                <li><i class="ti ti-user-check"></i> René Zaim Bautista Rodríguez</li>
+                <li><i class="ti ti-user-check"></i> Integrante del Equipo de Investigación</li>
+                <li><i class="ti ti-user-check"></i> Integrante del Equipo de Investigación</li>
+                <li><i class="ti ti-user-check"></i> Integrante del Equipo de Investigación</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Tarjeta Catedrática -->
+          <div class="team-card professor-card">
+            <div class="team-avatar prof-avatar"><i class="ti ti-school"></i></div>
+            <span class="prof-badge">CATEDRÁTICA</span>
+            <h3>Docente de Asignatura</h3>
+            <p><strong>Asignatura:</strong> Química General</p>
+            <small>Universidad Nacional de Ciencias Forestales (UNACIFOR)</small>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 UNACIFOR — Investigación en Ing. Energía Renovable de la clase de Química .</p>
+    <p>© 2026 UNACIFOR — Investigación en Ing. Energía Renovable y la asignatura de Química .</p>
   </footer>
 
   <!-- LIGHTBOX / VISOR DE GALERÍA -->
