@@ -70,94 +70,39 @@
   </header>
 
   <main>
-    <!-- SECCIÓN MECANISMO (SVG EXPLICATIVO ANIMADO) -->
+    <!-- SECCIÓN MECANISMO (VIDEO EXPLICATIVO + INFOGRAFÍA) -->
     <section id="mecanismo" class="container">
       <h2 class="section-title">Mecanismo Químico de Incrustación y Hotspots</h2>
       <p class="section-desc">Explicación del ciclo: El agua dura con iones $Ca^{2+}$ y $Mg^{2+}$ depositada durante el lavado o lluvia se evapora por la radiación solar, dejando cristales de carbonato de calcio ($CaCO_3$). Esta capa opaca bloquea los fotones y genera sombreado focalizado, elevando la temperatura hasta crear un punto caliente (Hotspot) que degrada la celda fotovoltaica.</p>
       
       <div class="svg-container">
-        <svg id="panel-svg" width="100%" viewBox="0 0 700 450" role="img" aria-label="Simulación meteorológica y química en panel solar">
-          <defs>
-            <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#092B2B"/>
-              <stop offset="100%" stop-color="#0D4F4F"/>
-            </linearGradient>
-
-            <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#FFF3C4"/>
-              <stop offset="30%" stop-color="#B4881B"/>
-              <stop offset="100%" stop-color="#B4881B" stop-opacity="0"/>
-            </radialGradient>
-
-            <linearGradient id="panelGlassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#1E4857"/>
-              <stop offset="50%" stop-color="#122E3B"/>
-              <stop offset="100%" stop-color="#081820"/>
-            </linearGradient>
-
-            <radialGradient id="hotspotGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#FF4D4D" stop-opacity="0.9"/>
-              <stop offset="100%" stop-color="#AB3428" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-
-          <!-- Fondo del SVG -->
-          <rect x="0" y="0" width="700" height="450" rx="8" fill="url(#bgGrad)"/>
-
-          <!-- Sol Principal -->
-          <g class="sun-system">
-            <circle cx="580" cy="70" r="60" fill="url(#sunGlow)"/>
-            <circle cx="580" cy="70" r="22" fill="#FFF3C4"/>
-          </g>
-
-          <!-- Nubes -->
-          <g class="cloud-group">
-            <path d="M 200 70 Q 220 40 260 50 Q 290 30 330 50 Q 360 40 380 70 Q 400 90 370 110 L 200 110 Z" fill="#526E7B" opacity="0.85"/>
-          </g>
-
-          <!-- Lluvia / Lavado -->
-          <g class="rain-group">
-            <line x1="250" y1="90" x2="245" y2="110" stroke="#4DA3FF" stroke-width="2.5" stroke-linecap="round"/>
-            <line x1="290" y1="80" x2="285" y2="105" stroke="#4DA3FF" stroke-width="2.5" stroke-linecap="round"/>
-            <line x1="330" y1="95" x2="325" y2="120" stroke="#4DA3FF" stroke-width="2.5" stroke-linecap="round"/>
-          </g>
-
-          <!-- Estructura del Panel Solar -->
-          <g id="panel-structure">
-            <polygon points="80,310 540,310 640,190 180,190" fill="#8A9A86"/>
-            <polygon points="90,304 532,304 630,196 188,196" fill="url(#panelGlassGrad)"/>
-            
-            <g stroke="#1A7A7A" stroke-width="1.2" opacity="0.6">
-              <line x1="198" y1="304" x2="296" y2="196"/><line x1="306" y1="304" x2="404" y2="196"/><line x1="414" y1="304" x2="512" y2="196"/>
-              <line x1="115" y1="277" x2="556" y2="277"/><line x1="140" y1="250" x2="581" y2="250"/><line x1="165" y1="223" x2="606" y2="223"/>
-            </g>
-          </g>
-
-          <!-- Gota residual en evaporación -->
-          <circle class="drop-main" cx="350" cy="235" r="9" fill="#378ADD" opacity="0.9"/>
-
-          <!-- Cristales de Sarro (Incrustación de CaCO3) -->
-          <g class="crystal-layer">
-            <ellipse cx="350" cy="245" rx="50" ry="16" fill="#F7F4F0" opacity="0.95" stroke="#B4881B" stroke-width="1.5"/>
-            <text x="350" y="249" text-anchor="middle" fill="#2A2A2A" font-size="10" font-weight="bold">CaCO₃</text>
-          </g>
-
-          <!-- Punto Caliente (Hotspot) - CORREGIDO SIN PARPADEO AGRESIVO -->
-          <g class="hotspot-layer">
-            <ellipse cx="350" cy="245" rx="65" ry="24" fill="url(#hotspotGlow)"/>
-            <text x="350" y="295" text-anchor="middle" fill="#FF6B6B" font-size="13" font-weight="bold">⚠️ PUNTO CALIENTE (HOTSPOT)</text>
-          </g>
-        </svg>
+        <!-- Cuando tengas la imagen de portada, agrega el atributo poster="img/video-poster.jpg" arriba, dentro de la etiqueta <video> -->
+        <video
+          id="mecanismo-video"
+          class="mecanismo-video"
+          src="video/Video-Calidad_Agua-Panel_Solar.mp4"
+          muted
+          playsinline
+          preload="metadata"
+          loop
+          aria-label="Video: mecanismo de incrustación y formación de hotspots en panel solar">
+          Tu navegador no soporta la reproducción de video.
+        </video>
       </div>
 
-      <div class="anim-controls" role="group" aria-label="Controles de la animación">
-        <button type="button" class="anim-btn" id="anim-play" aria-pressed="true">
-          <i class="ti ti-player-pause-filled"></i> Pausar
+      <div class="anim-controls" role="group" aria-label="Controles del video">
+        <button type="button" class="anim-btn" id="anim-play" aria-pressed="false">
+          <i class="ti ti-player-play-filled"></i> Reproducir
         </button>
         <button type="button" class="anim-btn" id="anim-reset">
           <i class="ti ti-player-track-prev-filled"></i> Reiniciar
         </button>
       </div>
+
+      <div class="infografia-container">
+        <img src="img/infografia.png" alt="Infografía del mecanismo de incrustación y formación de hotspots en paneles solares" loading="lazy">
+      </div>
+
       <p class="section-desc" style="margin-top:1rem;font-size:0.9rem;">
         Ecuación de formación de sarro: Ca²⁺(ac) + 2HCO₃⁻(ac) + calor → CaCO₃(s)↓ + CO₂(g)↑ + H₂O(l)
       </p>
