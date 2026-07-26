@@ -649,6 +649,51 @@ input:checked + .slider:before {
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
+/* Controles táctiles de la animación */
+.anim-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.anim-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid var(--teal-dark);
+  background-color: var(--bg-card);
+  color: var(--teal-dark);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.anim-btn:hover, .anim-btn:active {
+  background-color: var(--teal-dark);
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .anim-btn { color: var(--gold-light); border-color: var(--gold-light); }
+[data-theme="dark"] .anim-btn:hover, [data-theme="dark"] .anim-btn:active { background-color: var(--gold-light); color: #0A1919; }
+
+/* Pausa global de las animaciones del SVG cuando el usuario lo solicita o cuando sale del viewport */
+#panel-svg.anim-paused .cloud-group,
+#panel-svg.anim-paused .rain-group,
+#panel-svg.anim-paused .sun-system,
+#panel-svg.anim-paused .drop-main,
+#panel-svg.anim-paused .crystal-layer,
+#panel-svg.anim-paused .hotspot-layer {
+  animation-play-state: paused;
+}
+
 @keyframes cloudCycle {
   0% { transform: translateX(-120px); opacity: 0; }
   15% { opacity: 0.9; }
