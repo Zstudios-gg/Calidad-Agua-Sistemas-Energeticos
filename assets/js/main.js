@@ -308,3 +308,35 @@ function initGallery() {
     }
   }, { passive: true });
 }
+
+// ===== CONTROL DE MODO OSCURO / CLARO =====
+const toggleSwitch = document.querySelector('#checkbox-theme');
+const currentTheme = localStorage.getItem('theme');
+
+// Detectar preferencia guardada previa
+if (currentTheme) {
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  if (currentTheme === 'dark') {
+    toggleSwitch.checked = true;
+  }
+} else {
+  // Si no hay preferencia, detectar la del SO/Navegador
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (prefersDark) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    toggleSwitch.checked = true;
+  }
+}
+
+// Escuchar cambios del switch
+function switchTheme(e) {
+  if (e.target.checked) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('theme', 'light');
+  }
+}
+
+toggleSwitch.addEventListener('change', switchTheme, false);
