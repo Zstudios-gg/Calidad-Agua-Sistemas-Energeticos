@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calidad de Agua para el Mantenimiento de Paneles Solares Fotovoltaicos — UNACIFOR</title>
+<meta name="description" content="Caracterización fisicoquímica de tres fuentes hídricas del campus universitario para el mantenimiento de paneles solares fotovoltaicos. UNACIFOR — Ingeniería en Energía Renovable.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/dist/tabler-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="site-nav" id="site-nav">
+  <a href="#hero" class="nav-brand"><i class="ti ti-droplet"></i> UNACIFOR</a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#mecanismo">El mecanismo</a></li>
+    <li><a href="#problema">El problema</a></li>
+    <li><a href="#metodologia">Metodología</a></li>
+    <li><a href="#resultados">Resultados</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#conclusion">Conclusión</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+  </ul>
+</nav>
+
+<!-- ===== 4.1 HERO ===== -->
+<header class="hero" id="hero">
+  <div class="hero-rain" aria-hidden="true" id="hero-rain"></div>
+  <div class="hero-content">
+    <p class="eyebrow">Proyecto Integrador · Química General</p>
+    <h1>Calidad de Agua para el Mantenimiento de Paneles Solares Fotovoltaicos</h1>
+    <p class="hero-subtitle">Caracterización fisicoquímica de tres fuentes hídricas del campus universitario</p>
+    <p class="hero-affiliation">Universidad Nacional de Ciencias Forestales · Ingeniería en Energía Renovable · Química</p>
+  </div>
+  <a href="#mecanismo" class="scroll-cue" aria-label="Desplazarse a la siguiente sección">
+    <i class="ti ti-chevron-down"></i>
+  </a>
+</header>
+
+<main>
+
+<!-- ===== 4.2 MECANISMO ===== -->
+<section class="section section-dark" id="mecanismo">
+  <div class="container">
+    <p class="eyebrow eyebrow-light">La pieza central</p>
+    <h2 class="reveal">El mecanismo: cómo el agua dura daña un panel</h2>
+    <p class="section-lede reveal">Esta animación reemplaza al video solicitado por el jurado. Observa la secuencia completa, desde la gota hasta el punto caliente en la celda.</p>
+
+    <div class="mechanism reveal">
+      <div class="mechanism-toggle" role="group" aria-label="Comparar estado del panel">
+        <button class="toggle-btn is-active" data-state="clean" type="button">Panel limpio</button>
+        <button class="toggle-btn" data-state="scaled" type="button">Panel con sarro (6 meses)</button>
+      </div>
+
+      <div class="mechanism-stage">
+        <svg id="panel-svg" width="100%" viewBox="0 0 680 420" role="img" aria-labelledby="panel-svg-title panel-svg-desc">
+          <title id="panel-svg-title">Formación de sarro sobre un panel solar fotovoltaico</title>
+          <desc id="panel-svg-desc">Una gota de agua dura cae sobre un panel solar, se evapora sobre el vidrio caliente, los iones calcio y bicarbonato reaccionan formando carbonato de calcio sólido, que bloquea la luz y genera un punto caliente en la celda.</desc>
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+            <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#BFE0E0"/>
+              <stop offset="100%" stop-color="#EAF3F0"/>
+            </linearGradient>
+          </defs>
+
+          <!-- sky -->
+          <rect x="0" y="0" width="680" height="420" fill="url(#skyGrad)"/>
+          <!-- sun -->
+          <circle cx="590" cy="55" r="26" fill="#B4881B" opacity="0.85"/>
+          <g stroke="#B4881B" stroke-width="2" opacity="0.6">
+            <line x1="590" y1="10" x2="590" y2="0"/>
+            <line x1="627" y1="20" x2="634" y2="13"/>
+            <line x1="637" y1="55" x2="647" y2="55"/>
+          </g>
+          <!-- sprinkler / hose icon -->
+          <g transform="translate(120,40)">
+            <rect x="0" y="0" width="14" height="34" rx="3" fill="#1A7A7A"/>
+            <circle cx="7" cy="-2" r="6" fill="#1A7A7A"/>
+          </g>
+
+          <!-- mounting frame -->
+          <rect x="60" y="230" width="560" height="14" rx="3" fill="#6E6E6E"/>
+          <polygon points="60,244 40,300 620,300 620,244" fill="#DCD9D0" opacity="0.35"/>
+
+          <!-- panel glass -->
+          <g id="panel-glass">
+            <rect x="60" y="140" width="560" height="90" rx="4" fill="#BFD9E8" opacity="0.6"/>
+            <!-- cell grid -->
+            <g id="cells" stroke="#0D4F4F" stroke-width="1" opacity="0.5">
+              <line x1="130" y1="140" x2="130" y2="230"/>
+              <line x1="200" y1="140" x2="200" y2="230"/>
+              <line x1="270" y1="140" x2="270" y2="230"/>
+              <line x1="340" y1="140" x2="340" y2="230"/>
+              <line x1="410" y1="140" x2="410" y2="230"/>
+              <line x1="480" y1="140" x2="480" y2="230"/>
+              <line x1="550" y1="140" x2="550" y2="230"/>
+              <line x1="60" y1="185" x2="620" y2="185"/>
+            </g>
+          </g>
+
+          <!-- water drop falling -->
+          <circle class="drop" cx="340" cy="75" r="9" fill="#378ADD" opacity="0.75"/>
+
+          <!-- ion labels appear near evaporation point -->
+          <g class="ionlabel">
+            <circle cx="300" cy="160" r="7" fill="#639922"/>
+            <text x="300" y="163" text-anchor="middle" class="ion-text">Ca²⁺</text>
+            <circle cx="380" cy="160" r="7" fill="#7F77DD"/>
+            <text x="380" y="163" text-anchor="middle" class="ion-text">HCO₃⁻</text>
+            <line x1="309" y1="160" x2="371" y2="160" stroke="#5F5E5A" stroke-width="1" marker-end="url(#arrow)"/>
+          </g>
+
+          <!-- crystal / scale forming -->
+          <rect class="crystal" x="300" y="150" width="80" height="20" rx="3" fill="#F1EFE8" stroke="#888780" stroke-width="0.75"/>
+
+          <!-- blocked light rays -->
+          <g class="ray" stroke="#AB3428" stroke-width="2" opacity="0">
+            <line x1="590" y1="55" x2="340" y2="160" stroke-dasharray="4 4"/>
+          </g>
+
+          <!-- hotspot glow -->
+          <ellipse class="hotglow" cx="340" cy="205" rx="42" ry="16" fill="#AB3428" opacity="0"/>
+
+          <text class="hottext" x="340" y="270" text-anchor="middle" opacity="0">Punto caliente (hotspot)</text>
+
+          <!-- reaction equation -->
+          <text x="340" y="330" text-anchor="middle" class="equation">Ca²⁺(ac) + 2HCO₃⁻(ac) + calor → CaCO₃(s)↓ + CO₂(g)↑ + H₂O(l)</text>
+
+          <!-- ground -->
+          <rect x="0" y="360" width="680" height="60" fill="#0D4F4F" opacity="0.08"/>
+        </svg>
+      </div>
+
+      <p class="mechanism-caption reveal">La gota se evapora sobre el vidrio caliente del panel. Los iones de calcio (Ca²⁺) y bicarbonato (HCO₃⁻) disueltos en el agua reaccionan y precipitan como carbonato de calcio (CaCO₃): el sarro. Esta costra bloquea parte de la luz solar y genera puntos calientes que reducen la eficiencia de la celda.</p>
+
+      <div class="mechanism-controls" role="group" aria-label="Controles de la animación">
+        <button id="btn-play" class="ctrl-btn" type="button" aria-pressed="true">
+          <i class="ti ti-player-pause" id="play-icon"></i> <span id="play-label">Pausar</span>
+        </button>
+        <button id="btn-restart" class="ctrl-btn" type="button">
+          <i class="ti ti-refresh"></i> Reiniciar
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4.3 PROBLEMA ===== -->
+<section class="section" id="problema">
+  <div class="container container-narrow">
+    <p class="eyebrow reveal">El problema</p>
+    <h2 class="reveal">¿Por qué importa la calidad del agua?</h2>
+    <p class="reveal">Los sistemas de generación de energía solar fotovoltaica instalados en el campus universitario requieren agua para los procesos de limpieza de paneles y mantenimiento preventivo. La calidad del agua empleada en estas operaciones incide directamente en la vida útil de los equipos, ya que la presencia de minerales disueltos, sólidos en suspensión, metales pesados y agentes biológicos puede generar incrustaciones, corrosión y pérdida de eficiencia en la superficie captadora de los módulos fotovoltaicos. Actualmente no existe un protocolo documentado de control fisicoquímico del agua utilizada en el campus.</p>
+
+    <blockquote class="research-question reveal">
+      <i class="ti ti-flask" aria-hidden="true"></i>
+      <p>¿Cuáles son las características fisicoquímicas del agua disponible en el campus universitario y en qué medida estas propiedades representan un riesgo para la eficiencia y durabilidad del sistema de generación solar fotovoltaica?</p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ===== 4.4 METODOLOGÍA ===== -->
+<section class="section section-alt" id="metodologia">
+  <div class="container">
+    <p class="eyebrow reveal">Cómo se hizo</p>
+    <h2 class="reveal">Metodología</h2>
+
+    <ol class="timeline">
+      <li class="timeline-step reveal">
+        <span class="timeline-marker">1</span>
+        <h3>Recolección de muestras</h3>
+        <p>Tres fuentes en recipientes estériles, etiquetadas y transportadas al laboratorio.</p>
+      </li>
+      <li class="timeline-step reveal">
+        <span class="timeline-marker">2</span>
+        <h3>Medición de pH y conductividad</h3>
+        <p>Electrodos calibrados, medición directa en cada muestra.</p>
+      </li>
+      <li class="timeline-step reveal">
+        <span class="timeline-marker">3</span>
+        <h3>Evaluación de turbidez y dureza</h3>
+        <p>Comparación visual y prueba de evaporación.</p>
+      </li>
+      <li class="timeline-step reveal">
+        <span class="timeline-marker">4</span>
+        <h3>Registro y análisis</h3>
+        <p>Datos tabulados y comparados con estándares.</p>
+      </li>
+    </ol>
+
+    <div class="honesty-note reveal">
+      <i class="ti ti-info-circle" aria-hidden="true"></i>
+      <p>Por limitaciones de reactivos (EDTA, AgNO₃, K₂CrO₄) y accesorios de laboratorio, algunos métodos se adaptaron a aproximaciones empíricas, documentadas abiertamente como parte del proceso investigativo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4.5 RESULTADOS ===== -->
+<section class="section" id="resultados">
+  <div class="container">
+    <p class="eyebrow reveal">Los datos</p>
+    <h2 class="reveal">Resultados clave</h2>
+
+    <div class="table-wrap reveal">
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th scope="col">Parámetro</th>
+            <th scope="col">Agua de Lluvia</th>
+            <th scope="col">Agua de Grifo</th>
+            <th scope="col">Agua Purificada</th>
+            <th scope="col">Estándar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Parámetro">pH</td>
+            <td data-label="Agua de Lluvia">8.1 (alcalino)</td>
+            <td data-label="Agua de Grifo">6.7 (neutro)</td>
+            <td data-label="Agua Purificada">6.2 (lig. ácido)</td>
+            <td data-label="Estándar">6.0 – 8.0</td>
+          </tr>
+          <tr>
+            <td data-label="Parámetro">Conductividad</td>
+            <td data-label="Agua de Lluvia">0.12 mS/cm*</td>
+            <td data-label="Agua de Grifo">0.10 mS/cm*</td>
+            <td data-label="Agua Purificada">0.00 mS/cm</td>
+            <td data-label="Estándar">&lt; 0.20 mS/cm</td>
+          </tr>
+          <tr>
+            <td data-label="Parámetro">Temperatura</td>
+            <td data-label="Agua de Lluvia">24.5 °C</td>
+            <td data-label="Agua de Grifo">25.2 °C</td>
+            <td data-label="Agua Purificada">24.7 °C</td>
+            <td data-label="Estándar">Ambiental</td>
+          </tr>
+          <tr>
+            <td data-label="Parámetro">Turbidez</td>
+            <td data-label="Agua de Lluvia">Alta (visual)</td>
+            <td data-label="Agua de Grifo">Media (visual)</td>
+            <td data-label="Agua Purificada">Mínima (visual)</td>
+            <td data-label="Estándar">&lt; 1 NTU</td>
+          </tr>
+          <tr>
+            <td data-label="Parámetro">Dureza (residuo)</td>
+            <td data-label="Agua de Lluvia">Alto residuo</td>
+            <td data-label="Agua de Grifo">Residuo medio</td>
+            <td data-label="Agua Purificada">Residuo mínimo</td>
+            <td data-label="Estándar">&lt; 50 mg/L CaCO₃</td>
+          </tr>
+          <tr>
+            <td data-label="Parámetro">Cloruros (estim.)</td>
+            <td data-label="Agua de Lluvia">≈ 43.6 mg/L</td>
+            <td data-label="Agua de Grifo">≈ 36.4 mg/L</td>
+            <td data-label="Agua Purificada">≈ 0 mg/L</td>
+            <td data-label="Estándar">&lt; 250 mg/L</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="table-footnote">* Unidad de conductividad asumida como mS/cm, pendiente de confirmación con el fabricante del equipo.</p>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card reveal">
+        <h3>Conductividad (mS/cm)</h3>
+        <canvas id="chart-conductividad" width="400" height="260" role="img" aria-label="Gráfico de barras de conductividad: lluvia 0.12, grifo 0.10, purificada 0.00 mS/cm"></canvas>
+      </div>
+      <div class="chart-card reveal">
+        <h3>pH <span class="chart-sub">(rango aceptable 6.0–8.0 sombreado)</span></h3>
+        <canvas id="chart-ph" width="400" height="260" role="img" aria-label="Gráfico de barras de pH: lluvia 8.1, grifo 6.7, purificada 6.2, con rango aceptable de 6.0 a 8.0 marcado"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4.6 GALERÍA ===== -->
+<section class="section section-alt" id="galeria">
+  <div class="container">
+    <p class="eyebrow reveal">Evidencia fotográfica</p>
+    <h2 class="reveal">Galería del laboratorio</h2>
+    <p class="section-lede reveal">Toca cualquier imagen para ampliarla. Desliza para pasar entre fotos.</p>
+
+    <div class="gallery-grid reveal">
+      <button class="gallery-item" data-index="0" type="button">
+        <img src="img/imagen1-dureza-evaporacion.jpg" alt="Prueba empírica de dureza por evaporación: vasos de precipitado sobre placa calefactora" loading="lazy" width="600" height="450">
+        <span class="gallery-caption">1. Prueba de dureza por evaporación</span>
+      </button>
+      <button class="gallery-item" data-index="1" type="button">
+        <img src="img/imagen2-evaporacion-residuo.jpg" alt="Continuación del proceso de evaporación y observación del residuo remanente" loading="lazy" width="600" height="450">
+        <span class="gallery-caption">2. Residuo remanente tras evaporación</span>
+      </button>
+      <button class="gallery-item" data-index="2" type="button">
+        <img src="img/imagen3-turbidez-lluvia.jpg" alt="Prueba empírica de turbidez de la muestra de agua de lluvia, comparación visual sobre fondo blanco" loading="lazy" width="600" height="450">
+        <span class="gallery-caption">3. Turbidez — agua de lluvia</span>
+      </button>
+      <button class="gallery-item" data-index="3" type="button">
+        <img src="img/imagen4-turbidez-grifo.jpg" alt="Prueba empírica de turbidez de la muestra de agua de grifo, comparación visual sobre fondo blanco" loading="lazy" width="600" height="450">
+        <span class="gallery-caption">4. Turbidez — agua de grifo</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Cerrar imagen">
+    <i class="ti ti-x"></i>
+  </button>
+  <button class="lightbox-nav lightbox-prev" id="lightbox-prev" type="button" aria-label="Imagen anterior">
+    <i class="ti ti-chevron-left"></i>
+  </button>
+  <img id="lightbox-img" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightbox-next" type="button" aria-label="Imagen siguiente">
+    <i class="ti ti-chevron-right"></i>
+  </button>
+  <p class="lightbox-caption" id="lightbox-caption"></p>
+</div>
+
+<!-- ===== 4.7 CONCLUSIÓN ===== -->
+<section class="section section-accent" id="conclusion">
+  <div class="container container-narrow">
+    <blockquote class="conclusion-quote reveal">
+      <i class="ti ti-droplet-filled" aria-hidden="true"></i>
+      <p>La fuente actualmente más adecuada para el mantenimiento del sistema fotovoltaico es el agua purificada o un agua equivalente desmineralizada; el agua de lluvia y de grifo requieren tratamiento previo o una caracterización instrumental más rigurosa.</p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ===== 4.8 BIBLIOGRAFÍA ===== -->
+<section class="section" id="bibliografia">
+  <div class="container container-narrow">
+    <p class="eyebrow reveal">Fuentes</p>
+    <h2 class="reveal">Bibliografía</h2>
+    <ul class="biblio-list reveal">
+      <li>Asociación Americana de Obras Hidráulicas (AWWA). (2017). <em>Water quality &amp; treatment: A handbook on drinking water</em> (6.ª ed.). McGraw-Hill.</li>
+      <li>Cui, M., &amp; Bhave, R. R. (2018). Challenges and strategies in developing photovoltaic cleaning systems. <em>Renewable and Sustainable Energy Reviews, 88</em>, 267–282. <a href="https://doi.org/10.1016/j.rser.2018.02.043" target="_blank" rel="noopener">doi.org/10.1016/j.rser.2018.02.043</a></li>
+      <li>Hematiyan, A., &amp; Ameri, M. (2020). Effect of water quality on solar panel surface cleaning. <em>Solar Energy, 198</em>, 44–52. <a href="https://doi.org/10.1016/j.solener.2019.12.010" target="_blank" rel="noopener">doi.org/10.1016/j.solener.2019.12.010</a></li>
+      <li>Organización Mundial de la Salud (OMS). (2017). <em>Guías para la calidad del agua de consumo humano</em> (4.ª ed.).</li>
+      <li>Skoog, D. A., Holler, F. J., &amp; Crouch, S. R. (2014). <em>Principios de análisis instrumental</em> (6.ª ed.). Cengage Learning.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 4.9 EQUIPO + DESCARGA ===== -->
+<section class="section section-alt" id="equipo">
+  <div class="container container-narrow">
+    <p class="eyebrow reveal">El equipo</p>
+    <h2 class="reveal">Créditos</h2>
+    <ul class="team-list reveal">
+      <li>Aldany Josué Yanez Mejía</li>
+      <li>Daniela Yoselin Rivera Aguilar</li>
+      <li>Jessica Yadira García Guerra</li>
+      <li>René Zaim Bautista Rodriguez</li>
+      <li>Yuly Alejandra Chavez Castillo</li>
+      <li>Shirle Yirel Mateo Mendoza</li>
+    </ul>
+    <p class="catedratica reveal">Catedrática: MSc. Cinthia Yamileth Velázques.</p>
+
+    <a href="docs/informe-final.pdf" target="_blank" rel="noopener" class="download-btn reveal">
+      <i class="ti ti-file-download"></i> Descargar informe completo (PDF)
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== 4.10 FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-icons" aria-hidden="true">
+    <i class="ti ti-droplet"></i>
+    <i class="ti ti-solar-panel-2"></i>
+    <i class="ti ti-flask"></i>
+  </div>
+  <p>UNACIFOR · Ingeniería en Energía Renovable · Julio 2026</p>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
