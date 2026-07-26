@@ -320,10 +320,11 @@ a { color: var(--teal-mid); }
 }
 
 .mechanism-stage {
-  background: #fff;
+  background: #092B2B;
   border-radius: var(--radius);
   padding: 1rem;
   overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
 
 .mechanism-caption {
@@ -362,32 +363,33 @@ a { color: var(--teal-mid); }
 /* SVG animation classes */
 #panel-svg .equation {
   font-family: var(--font-body);
-  font-size: 13px;
-  fill: var(--text-gray);
+  font-size: 12.5px;
+  fill: var(--cream);
 }
 #panel-svg .ion-text {
   font-family: var(--font-body);
-  font-size: 9px;
-  fill: #fff;
-  font-weight: 600;
+  font-size: 10px;
+  fill: #FFF;
+  font-weight: 700;
 }
 #panel-svg .hottext {
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 700;
-  fill: var(--alert);
+  fill: #FF6B6B;
+  filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.8));
 }
 
-@keyframes evapDrop { 0%,18% { transform: translateY(0); opacity: 1; } 32% { transform: translateY(85px); opacity: 0; } 100% { opacity: 0; } }
+@keyframes evapDrop { 0%,18% { transform: translateY(0); opacity: 1; } 32% { transform: translateY(185px); opacity: 0; } 100% { opacity: 0; } }
 @keyframes ionFade { 0%,20% { opacity: 0; } 26%,45% { opacity: 1; } 52%,100% { opacity: 0; } }
-@keyframes crystalForm { 0%,45% { opacity: 0; transform: scaleX(0); } 60%,100% { opacity: 1; transform: scaleX(1); } }
+@keyframes crystalForm { 0%,45% { opacity: 0; transform: scale(0); } 60%,100% { opacity: 1; transform: scale(1); } }
 @keyframes rayBlock { 0%,55% { opacity: 0; } 62%,88% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes hotPulse { 0%,55% { opacity: 0; } 65% { opacity: .9; } 75% { opacity: .35; } 85% { opacity: .9; } 100% { opacity: 0; } }
 @keyframes hotTextFade { 0%,58% { opacity: 0; } 66%,100% { opacity: 1; } }
 
 .drop { animation: evapDrop 6s ease-in infinite; transform-origin: center; }
 .ionlabel { animation: ionFade 6s ease-in infinite; }
-.crystal { animation: crystalForm 6s ease-in infinite; transform-origin: 340px 160px; }
+.crystal { animation: crystalForm 6s ease-in infinite; transform-origin: 350px 245px; }
 .ray { animation: rayBlock 6s ease-in infinite; }
 .hotglow { animation: hotPulse 6s ease-in infinite; }
 .hottext { animation: hotTextFade 6s ease-in infinite; }
@@ -407,7 +409,7 @@ a { color: var(--teal-mid); }
 .mechanism.state-scaled .ray {
   animation: none;
   opacity: 1;
-  transform: scaleX(1);
+  transform: scale(1);
 }
 .mechanism.state-scaled .drop,
 .mechanism.state-scaled .ionlabel {
