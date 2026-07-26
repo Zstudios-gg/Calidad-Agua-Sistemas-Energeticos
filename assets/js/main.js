@@ -1,342 +1,155 @@
-// =========================================================
-// UNACIFOR — Micrositio de defensa — main.js (vanilla, sin dependencias)
-// =========================================================
-
 document.addEventListener('DOMContentLoaded', () => {
-  initNav();
-  initHeroRain();
-  initScrollReveal();
-  initMechanism();
-  initCharts();
-  initGallery();
-});
 
-/* ---------- Navegación móvil ---------- */
-function initNav() {
-  const toggle = document.getElementById('nav-toggle');
-  const links = document.getElementById('nav-links');
-  if (!toggle || !links) return;
+  // =========================================================
+  // 1. NAVEGACIÓN MÓVIL (MENÚ HAMBURGUESA)
+  // =========================================================
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
 
-  const closeMenu = () => {
-    links.classList.remove('is-open');
-    toggle.setAttribute('aria-expanded', 'false');
-  };
-
-  toggle.addEventListener('click', () => {
-    const isOpen = links.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', String(isOpen));
-  });
-
-  links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-}
-
-/* ---------- Lluvia decorativa en el hero (CSS-driven, generada en JS) ---------- */
-function initHeroRain() {
-  const container = document.getElementById('hero-rain');
-  if (!container) return;
-  const dropCount = window.innerWidth < 600 ? 14 : 26;
-  const frag = document.createDocumentFragment();
-  for (let i = 0; i < dropCount; i++) {
-    const drop = document.createElement('span');
-    const left = Math.random() * 100;
-    const duration = 4 + Math.random() * 5;
-    const delay = Math.random() * 6;
-    drop.style.left = left + '%';
-    drop.style.animationDuration = duration + 's';
-    drop.style.animationDelay = delay + 's';
-    frag.appendChild(drop);
-  }
-  container.appendChild(frag);
-}
-
-/* ---------- Scroll reveal con IntersectionObserver nativo ---------- */
-function initScrollReveal() {
-  const items = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window) || items.length === 0) {
-    items.forEach(el => el.classList.add('is-visible'));
-    return;
-  }
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
+  if (navToggle && navLinks) {
+    // Abrir / Cerrar menú
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navLinks.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', isOpen);
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-  items.forEach(el => observer.observe(el));
-}
-
-/* ---------- Animación principal del mecanismo ---------- */
-function initMechanism() {
-  const mechanism = document.querySelector('.mechanism');
-  const stage = document.querySelector('.mechanism-stage');
-  const btnPlay = document.getElementById('btn-play');
-  const btnRestart = document.getElementById('btn-restart');
-  const playIcon = document.getElementById('play-icon');
-  const playLabel = document.getElementById('play-label');
-  const toggleBtns = document.querySelectorAll('.toggle-btn');
-  if (!mechanism || !stage) return;
-
-  let isPlaying = false; // starts paused until it scrolls into view
-  let hasStarted = false;
-
-  const setPaused = (paused) => {
-    isPlaying = !paused;
-    mechanism.classList.toggle('is-paused', paused);
-    playIcon.className = paused ? 'ti ti-player-play' : 'ti ti-player-pause';
-    playLabel.textContent = paused ? 'Reproducir' : 'Pausar';
-    btnPlay.setAttribute('aria-pressed', String(!paused));
-  };
-
-  // Auto-play in loop only when the stage enters the viewport (no aggressive autoplay on load)
-  if ('IntersectionObserver' in window) {
-    const stageObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !hasStarted) {
-          hasStarted = true;
-          setPaused(false);
-        } else if (!entry.isIntersecting && hasStarted) {
-          // pause while off-screen to save battery, resume label state on return
-          mechanism.classList.add('is-paused');
-        } else if (entry.isIntersecting && hasStarted && isPlaying) {
-          mechanism.classList.remove('is-paused');
-        }
+    // Cerrar el menú al hacer clic en cualquier enlace
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
       });
-    }, { threshold: 0.35 });
-    stageObserver.observe(stage);
-  } else {
-    setPaused(false);
-  }
-
-  // Play / Pause button — touch and click both supported via click event (fires for both)
-  btnPlay.addEventListener('click', () => {
-    setPaused(isPlaying);
-  });
-
-  // Restart: replay the CSS animation by forcing reflow
-  btnRestart.addEventListener('click', () => {
-    const animated = stage.querySelectorAll('.drop, .ionlabel, .crystal, .ray, .hotglow, .hottext');
-    animated.forEach(el => {
-      el.style.animation = 'none';
     });
-    // Force reflow
-    void stage.offsetWidth;
-    animated.forEach(el => {
-      el.style.animation = '';
-    });
-    if (!isPlaying) setPaused(false);
-  });
 
-  // Before / after toggle
-  toggleBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      toggleBtns.forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      const state = btn.dataset.state;
-      mechanism.classList.toggle('state-scaled', state === 'scaled');
-      if (state === 'scaled') {
-        mechanism.classList.add('is-paused');
-      } else if (isPlaying) {
-        mechanism.classList.remove('is-paused');
+    // Cerrar el menú si se hace clic fuera de él
+    document.addEventListener('click', (e) => {
+      if (!navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+        navLinks.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
       }
     });
-  });
-}
-
-/* ---------- Gráficos ligeros en Canvas nativo (sin librerías) ---------- */
-function initCharts() {
-  drawBarChart('chart-conductividad', {
-    labels: ['Lluvia', 'Grifo', 'Purificada'],
-    values: [0.12, 0.10, 0.00],
-    unit: 'mS/cm',
-    max: 0.20,
-    thresholdLine: 0.20,
-    thresholdLabel: 'Límite 0.20'
-  });
-
-  drawBarChart('chart-ph', {
-    labels: ['Lluvia', 'Grifo', 'Purificada'],
-    values: [8.1, 6.7, 6.2],
-    unit: '',
-    max: 10,
-    acceptableRange: [6.0, 8.0]
-  });
-}
-
-function drawBarChart(canvasId, opts) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  // Handle device pixel ratio for crisp rendering
-  const dpr = window.devicePixelRatio || 1;
-  const cssWidth = canvas.clientWidth || 400;
-  const cssHeight = 260;
-  canvas.width = cssWidth * dpr;
-  canvas.height = cssHeight * dpr;
-  canvas.style.height = cssHeight + 'px';
-  ctx.scale(dpr, dpr);
-
-  const W = cssWidth, H = cssHeight;
-  const paddingLeft = 36, paddingBottom = 34, paddingTop = 16, paddingRight = 12;
-  const chartW = W - paddingLeft - paddingRight;
-  const chartH = H - paddingTop - paddingBottom;
-
-  ctx.clearRect(0, 0, W, H);
-
-  const colors = ['#378ADD', '#1A7A7A', '#2C8C8C'];
-  const max = opts.max;
-
-  // acceptable range band (for pH chart)
-  if (opts.acceptableRange) {
-    const [lo, hi] = opts.acceptableRange;
-    const yLo = paddingTop + chartH - (lo / max) * chartH;
-    const yHi = paddingTop + chartH - (hi / max) * chartH;
-    ctx.fillStyle = 'rgba(44, 140, 140, 0.12)';
-    ctx.fillRect(paddingLeft, yHi, chartW, yLo - yHi);
   }
 
-  // axis
-  ctx.strokeStyle = '#DCD9D0';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(paddingLeft, paddingTop);
-  ctx.lineTo(paddingLeft, paddingTop + chartH);
-  ctx.lineTo(paddingLeft + chartW, paddingTop + chartH);
-  ctx.stroke();
+  // =========================================================
+  // 2. CONTROL DE MODO CLARO / MODO OSCURO
+  // =========================================================
+  const toggleSwitch = document.querySelector('#checkbox-theme');
+  const currentTheme = localStorage.getItem('theme');
 
-  const n = opts.values.length;
-  const gap = 24;
-  const barWidth = (chartW - gap * (n + 1)) / n;
+  // Aplicar tema guardado en localStorage o detectar preferencia del sistema
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'dark' && toggleSwitch) {
+      toggleSwitch.checked = true;
+    }
+  } else {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (prefersDark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      if (toggleSwitch) toggleSwitch.checked = true;
+    }
+  }
 
-  ctx.font = '12px "Segoe UI", sans-serif';
-  ctx.textAlign = 'center';
+  // Escuchar el cambio en el Switch
+  if (toggleSwitch) {
+    toggleSwitch.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  }
 
-  opts.values.forEach((val, i) => {
-    const barH = (val / max) * chartH;
-    const x = paddingLeft + gap * (i + 1) + barWidth * i;
-    const y = paddingTop + chartH - barH;
-
-    ctx.fillStyle = colors[i % colors.length];
-    roundRectPath(ctx, x, y, barWidth, barH, 4);
-    ctx.fill();
-
-    // value label
-    ctx.fillStyle = '#2A2A2A';
-    ctx.fillText(val.toFixed(2).replace(/\.00$/, val % 1 === 0 ? '' : '.00'), x + barWidth / 2, y - 6);
-
-    // category label
-    ctx.fillStyle = '#6E6E6E';
-    ctx.fillText(opts.labels[i], x + barWidth / 2, paddingTop + chartH + 18);
-  });
-}
-
-function roundRectPath(ctx, x, y, w, h, r) {
-  const radius = Math.min(r, w / 2, h / 2);
-  ctx.beginPath();
-  ctx.moveTo(x + radius, y);
-  ctx.lineTo(x + w - radius, y);
-  ctx.arcTo(x + w, y, x + w, y + radius, radius);
-  ctx.lineTo(x + w, y + h);
-  ctx.lineTo(x, y + h);
-  ctx.lineTo(x, y + radius);
-  ctx.arcTo(x, y, x + radius, y, radius);
-  ctx.closePath();
-}
-
-/* ---------- Galería con lightbox táctil + swipe ---------- */
-function initGallery() {
-  const items = Array.from(document.querySelectorAll('.gallery-item'));
+  // =========================================================
+  // 3. VISOR DE GALERÍA (LIGHTBOX) CON NAVEGACIÓN
+  // =========================================================
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxCaption = document.getElementById('lightbox-caption');
-  const btnClose = document.getElementById('lightbox-close');
-  const btnPrev = document.getElementById('lightbox-prev');
-  const btnNext = document.getElementById('lightbox-next');
-  if (items.length === 0 || !lightbox) return;
+  const closeBtn = document.getElementById('lightbox-close');
+  const prevBtn = document.getElementById('lightbox-prev');
+  const nextBtn = document.getElementById('lightbox-next');
 
+  // Obtener todas las imágenes dentro de tarjetas de galería
+  const galleryImages = Array.from(document.querySelectorAll('.gallery-card img'));
   let currentIndex = 0;
 
-  const openAt = (index) => {
-    currentIndex = (index + items.length) % items.length;
-    const img = items[currentIndex].querySelector('img');
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightboxCaption.textContent = img.alt;
-    lightbox.hidden = false;
-    document.body.style.overflow = 'hidden';
-  };
+  function openLightbox(index) {
+    if (galleryImages.length === 0) return;
+    
+    // Ciclar índices (si supera el final, vuelve al inicio y viceversa)
+    if (index < 0) index = galleryImages.length - 1;
+    if (index >= galleryImages.length) index = 0;
 
-  const close = () => {
-    lightbox.hidden = true;
-    document.body.style.overflow = '';
-  };
+    currentIndex = index;
+    const selectedImg = galleryImages[currentIndex];
 
-  items.forEach((item, index) => {
-    item.addEventListener('click', () => openAt(index));
-  });
+    lightboxImg.src = selectedImg.src;
+    lightboxImg.alt = selectedImg.alt || 'Evidencia de campo';
+    lightboxCaption.textContent = selectedImg.alt || '';
+    
+    lightbox.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden'; // Evita scroll de fondo al estar abierto
+  }
 
-  btnClose.addEventListener('click', close);
-  btnPrev.addEventListener('click', () => openAt(currentIndex - 1));
-  btnNext.addEventListener('click', () => openAt(currentIndex + 1));
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) close();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (lightbox.hidden) return;
-    if (e.key === 'Escape') close();
-    if (e.key === 'ArrowLeft') openAt(currentIndex - 1);
-    if (e.key === 'ArrowRight') openAt(currentIndex + 1);
-  });
-
-  // Swipe support
-  let touchStartX = 0;
-  lightbox.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].clientX;
-  }, { passive: true });
-
-  lightbox.addEventListener('touchend', (e) => {
-    const touchEndX = e.changedTouches[0].clientX;
-    const delta = touchEndX - touchStartX;
-    if (Math.abs(delta) > 40) {
-      if (delta < 0) openAt(currentIndex + 1);
-      else openAt(currentIndex - 1);
+  function closeLightbox() {
+    if (lightbox) {
+      lightbox.setAttribute('hidden', '');
+      document.body.style.overflow = ''; // Restaura el scroll
     }
-  }, { passive: true });
-}
-
-// ===== CONTROL DE MODO OSCURO / CLARO =====
-const toggleSwitch = document.querySelector('#checkbox-theme');
-const currentTheme = localStorage.getItem('theme');
-
-// Detectar preferencia guardada previa
-if (currentTheme) {
-  document.documentElement.setAttribute('data-theme', currentTheme);
-  if (currentTheme === 'dark') {
-    toggleSwitch.checked = true;
   }
-} else {
-  // Si no hay preferencia, detectar la del SO/Navegador
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if (prefersDark) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    toggleSwitch.checked = true;
-  }
-}
 
-// Escuchar cambios del switch
-function switchTheme(e) {
-  if (e.target.checked) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    localStorage.setItem('theme', 'dark');
-  } else {
-    document.documentElement.setAttribute('data-theme', 'light');
-    localStorage.setItem('theme', 'light');
-  }
-}
+  // Eventos para abrir imágenes
+  galleryImages.forEach((img, index) => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => openLightbox(index));
+  });
 
-toggleSwitch.addEventListener('change', switchTheme, false);
+  // Botones del Lightbox
+  if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+  if (prevBtn) prevBtn.addEventListener('click', () => openLightbox(currentIndex - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => openLightbox(currentIndex + 1));
+
+  // Cerrar al hacer clic en el fondo negro
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+
+  // Navegación por teclado (Esc, Flechas)
+  document.addEventListener('keydown', (e) => {
+    if (lightbox && !lightbox.hasAttribute('hidden')) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') openLightbox(currentIndex - 1);
+      if (e.key === 'ArrowRight') openLightbox(currentIndex + 1);
+    }
+  });
+
+  // =========================================================
+  // 4. DESPLAZAMIENTO SUAVE (SMOOTH SCROLL)
+  // =========================================================
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        const navHeight = document.querySelector('.site-nav')?.offsetHeight || 60;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+});
