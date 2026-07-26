@@ -773,3 +773,90 @@ a:focus-visible, button:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
+
+/* =========================================================
+   VARIABLES DE TEMA (MODO CLARO Y MODO OSCURO)
+   ========================================================= */
+
+/* Modo Claro (Por defecto) */
+:root {
+  --bg-main: #F7F4F0;
+  --bg-alt: #EFEAE1;
+  --bg-card: #FFFFFF;
+  --text-primary: #2A2A2A;
+  --text-secondary: #6E6E6E;
+  --border-color: rgba(13, 79, 79, 0.12);
+}
+
+/* Override cuando se activa el Modo Oscuro */
+[data-theme="dark"] {
+  --bg-main: #0A1919;
+  --bg-alt: #0D2626;
+  --bg-card: #123333;
+  --text-primary: #EAEAEA;
+  --text-secondary: #B0C4C4;
+  --border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Aplicación de las variables a la estructura */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.section-alt { background-color: var(--bg-alt); }
+.research-question, .timeline-step, .honesty-note, .results-table, .chart-card {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+p, .timeline-step p, .honesty-note p { color: var(--text-secondary); }
+
+/* Switch Toggle Design */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  transition: .3s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--teal-light);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
