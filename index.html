@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <title>Calidad de Agua para Mantenimiento de Paneles Solares - UNACIFOR</title>
   
@@ -64,7 +64,7 @@
       <p class="hero-subtitle">Caracterización fisicoquímica de tres fuentes hídricas del campus universitario y su impacto en la eficiencia energética.</p>
       
       <div class="hero-actions">
-        <a href="informe-final.pdf" download class="btn-download">
+        <a href="docs/informe-final.pdf" target="_blank" rel="noopener" class="btn-download">
           <i class="ti ti-file-download"></i> Descargar Informe Final (PDF)
         </a>
       </div>
@@ -155,17 +155,30 @@
           </g>
         </svg>
       </div>
+
+      <div class="anim-controls" role="group" aria-label="Controles de la animación">
+        <button type="button" class="anim-btn" id="anim-play" aria-pressed="true">
+          <i class="ti ti-player-pause-filled"></i> Pausar
+        </button>
+        <button type="button" class="anim-btn" id="anim-reset">
+          <i class="ti ti-player-track-prev-filled"></i> Reiniciar
+        </button>
+      </div>
+      <p class="section-desc" style="margin-top:1rem;font-size:0.9rem;">
+        Ecuación de formación de sarro: Ca²⁺(ac) + 2HCO₃⁻(ac) + calor → CaCO₃(s)↓ + CO₂(g)↑ + H₂O(l)
+      </p>
     </section>
 
     <!-- SECCIÓN EL PROBLEMA -->
     <section id="problema" class="section-alt">
       <div class="container">
         <h2 class="section-title">El Problema de Investigación</h2>
+        <p class="section-desc">Los sistemas de generación de energía solar fotovoltaica instalados en el campus universitario requieren agua para los procesos de limpieza de paneles y mantenimiento preventivo. La calidad del agua empleada en estas operaciones incide directamente en la vida útil de los equipos, ya que la presencia de minerales disueltos, sólidos en suspensión, metales pesados y agentes biológicos puede generar incrustaciones, corrosión y pérdida de eficiencia en la superficie captadora de los módulos fotovoltaicos. Actualmente no existe un protocolo documentado de control fisicoquímico del agua utilizada en el campus.</p>
         <div class="research-question">
           <i class="ti ti-help-circle-filled icon-lg"></i>
           <div>
             <h3>Pregunta Principal</h3>
-            <p>¿Qué fuente hídrica del campus presenta los parámetros fisicoquímicos más adecuados para el lavado de módulos fotovoltaicos minimizando el riesgo de incrustaciones de $CaCO_3$ y pérdida de eficiencia?</p>
+            <p>¿Cuáles son las características fisicoquímicas del agua disponible en el campus universitario y en qué medida estas propiedades representan un riesgo para la eficiencia y durabilidad del sistema de generación solar fotovoltaica?</p>
           </div>
         </div>
       </div>
@@ -177,18 +190,31 @@
       <div class="timeline">
         <div class="timeline-step">
           <div class="step-num">1</div>
-          <h3>Muestreo en Sitio</h3>
-          <p>Toma de muestras de agua en tres fuentes: Pozo Profundo, Tanque de Almacenamiento y Agua de Grifo del campus UNACIFOR.</p>
+          <h3>Recolección de Muestras</h3>
+          <p>Toma de agua de lluvia, agua de grifo del campus y agua purificada comercial (control de referencia), en envases de vidrio previamente lavados con agua destilada.</p>
         </div>
         <div class="timeline-step">
           <div class="step-num">2</div>
-          <h3>Medición Fisicoquímica</h3>
-          <p>Análisis multiparámetro de pH, conductividad eléctrica ($\mu S/cm$), sólidos disueltos totales (TDS) y dureza total.</p>
+          <h3>Medición de pH y Conductividad</h3>
+          <p>Electrodos calibrados (pH-metro con sensor de temperatura y conductímetro portátil), medición directa por inmersión en cada muestra.</p>
         </div>
         <div class="timeline-step">
           <div class="step-num">3</div>
-          <h3>Evaluación y Comparativa</h3>
-          <p>Contraste de parámetros cuantitativos frente a las recomendaciones técnicas internacionales para mantenimiento de sistemas fotovoltaicos.</p>
+          <h3>Turbidez y Dureza</h3>
+          <p>Comparación visual empírica de turbidez y prueba de evaporación para estimar dureza, ante la falta de reactivos para los métodos instrumentales originales.</p>
+        </div>
+        <div class="timeline-step">
+          <div class="step-num">4</div>
+          <h3>Registro y Análisis</h3>
+          <p>Datos tabulados y comparados con los estándares recomendados por la OMS y por los fabricantes de módulos fotovoltaicos.</p>
+        </div>
+      </div>
+
+      <div class="honesty-note" style="margin-top:2rem;">
+        <i class="ti ti-alert-triangle icon-lg" style="color:var(--warning-amber);"></i>
+        <div>
+          <h3>Nota de Transparencia Metodológica</h3>
+          <p>Por limitaciones de reactivos (EDTA, AgNO₃, K₂CrO₄) y accesorios de laboratorio, algunos métodos se adaptaron a aproximaciones empíricas, documentadas abiertamente como parte del proceso investigativo.</p>
         </div>
       </div>
     </section>
@@ -203,41 +229,72 @@
           <table class="results-table">
             <thead>
               <tr>
-                <th>Fuente de Agua</th>
-                <th>pH</th>
-                <th>Conductividad ($\mu S/cm$)</th>
-                <th>TDS (ppm)</th>
-                <th>Dureza Total</th>
-                <th>Riesgo de Incrustación</th>
+                <th>Parámetro</th>
+                <th>Agua de Lluvia</th>
+                <th>Agua de Grifo</th>
+                <th>Agua Purificada</th>
+                <th>Estándar</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Pozo Profundo</strong></td>
-                <td>7.8</td>
-                <td>420</td>
-                <td>270</td>
-                <td>Alta ($Ca^{2+}, Mg^{2+}$)</td>
-                <td><span class="badge badge-danger">Alto</span></td>
+                <td><strong>pH</strong></td>
+                <td>8.1 (alcalino)</td>
+                <td>6.7 (neutro)</td>
+                <td>6.2 (lig. ácido)</td>
+                <td>6.0 – 8.0</td>
               </tr>
               <tr>
-                <td><strong>Tanque de Almacenamiento</strong></td>
-                <td>7.4</td>
-                <td>310</td>
-                <td>195</td>
-                <td>Moderada</td>
-                <td><span class="badge badge-warning">Moderado</span></td>
+                <td><strong>Conductividad</strong></td>
+                <td>0.12 mS/cm*</td>
+                <td>0.10 mS/cm*</td>
+                <td>0.00 mS/cm</td>
+                <td>&lt; 0.20 mS/cm</td>
               </tr>
               <tr>
-                <td><strong>Agua de Grifo (Tratada)</strong></td>
-                <td>6.9</td>
-                <td>180</td>
-                <td>115</td>
-                <td>Baja</td>
-                <td><span class="badge badge-success">Bajo</span></td>
+                <td><strong>Temperatura</strong></td>
+                <td>24.5 °C</td>
+                <td>25.2 °C</td>
+                <td>24.7 °C</td>
+                <td>Ambiental</td>
+              </tr>
+              <tr>
+                <td><strong>Turbidez</strong></td>
+                <td><span class="badge badge-danger">Muy turbia</span></td>
+                <td><span class="badge badge-warning">Poco turbia</span></td>
+                <td><span class="badge badge-success">Casi nula</span></td>
+                <td>&lt; 1 NTU</td>
+              </tr>
+              <tr>
+                <td><strong>Dureza (residuo)</strong></td>
+                <td>Mayor residuo de cal</td>
+                <td>Menor residuo de cal</td>
+                <td>No evaluada</td>
+                <td>&lt; 50 mg/L CaCO₃</td>
+              </tr>
+              <tr>
+                <td><strong>Cloruros (estim.)</strong></td>
+                <td>≈ 43.6 mg/L</td>
+                <td>≈ 36.4 mg/L</td>
+                <td>≈ 0 mg/L</td>
+                <td>&lt; 250 mg/L</td>
               </tr>
             </tbody>
           </table>
+        </div>
+        <p style="font-size:0.85rem;color:var(--text-secondary);margin-top:0.8rem;text-align:center;">
+          * Unidad de conductividad asumida como mS/cm, pendiente de confirmación con el fabricante del equipo. La turbidez y la dureza se determinaron mediante métodos empíricos (comparación visual y evaporación), no instrumentales; los cloruros se estimaron indirectamente a partir de la conductividad.
+        </p>
+
+        <div class="charts-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.5rem;">
+          <div class="gallery-card" style="padding:1.2rem;">
+            <h3 style="text-align:center;color:var(--teal-dark);font-size:1.05rem;margin-bottom:0.8rem;">Conductividad (mS/cm)</h3>
+            <canvas id="chart-conductividad" width="380" height="260" style="width:100%;height:auto;"></canvas>
+          </div>
+          <div class="gallery-card" style="padding:1.2rem;">
+            <h3 style="text-align:center;color:var(--teal-dark);font-size:1.05rem;margin-bottom:0.8rem;">pH (rango aceptable 6.0–8.0)</h3>
+            <canvas id="chart-ph" width="380" height="260" style="width:100%;height:auto;"></canvas>
+          </div>
         </div>
       </div>
     </section>
@@ -247,16 +304,20 @@
       <h2 class="section-title">Galería y Evidencia de Campo</h2>
       <div class="gallery-grid">
         <div class="gallery-card">
-          <img src="assets/img/muestra1.jpg" alt="Muestreo de agua en fuente de pozo profundo">
-          <div class="gallery-info">Muestreo en Pozo</div>
+          <img src="img/imagen1-dureza-evaporacion.jpg" alt="Prueba empírica de dureza por evaporación, vasos de precipitado sobre placa calefactora" loading="lazy">
+          <div class="gallery-info">Prueba de Dureza por Evaporación</div>
         </div>
         <div class="gallery-card">
-          <img src="assets/img/muestra2.jpg" alt="Pruebas de pH y conductividad con multiparámetro">
-          <div class="gallery-info">Análisis Fisicoquímico</div>
+          <img src="img/imagen2-evaporacion-residuo.jpg" alt="Continuación del proceso de evaporación y observación del residuo remanente" loading="lazy">
+          <div class="gallery-info">Residuo Remanente Post-Evaporación</div>
         </div>
         <div class="gallery-card">
-          <img src="assets/img/muestra3.jpg" alt="Evaluación de superficie de panel solar fotovoltaico">
-          <div class="gallery-info">Inspección de Celdas</div>
+          <img src="img/imagen3-turbidez-lluvia.jpg" alt="Prueba empírica de turbidez de la muestra de agua de lluvia" loading="lazy">
+          <div class="gallery-info">Turbidez — Agua de Lluvia</div>
+        </div>
+        <div class="gallery-card">
+          <img src="img/imagen4-turbidez-grifo.jpg" alt="Prueba empírica de turbidez de la muestra de agua de grifo" loading="lazy">
+          <div class="gallery-info">Turbidez — Agua de Grifo</div>
         </div>
       </div>
     </section>
@@ -269,7 +330,7 @@
           <i class="ti ti-circle-check-filled icon-lg" style="color: var(--teal-light);"></i>
           <div>
             <h3>Recomendación de Lavado</h3>
-            <p>Se concluye que el agua de pozo directo <strong>no es apta</strong> para el lavado continuo sin un tratamiento previo de desmineralización o ablandamiento. Se recomienda priorizar el uso de agua tratada o filtrada para preservar la transmitancia del cristal fotovoltaico y evitar pérdidas de generación eléctrica.</p>
+            <p>La fuente actualmente más adecuada para el mantenimiento del sistema fotovoltaico es <strong>el agua purificada o un agua equivalente desmineralizada</strong>; el agua de lluvia y el agua de grifo requieren tratamiento previo o una caracterización instrumental más rigurosa antes de recomendarse como fuente de limpieza rutinaria.</p>
           </div>
         </div>
       </div>
@@ -282,19 +343,23 @@
         <ul class="references-list">
           <li>
             <i class="ti ti-book"></i>
-            <span><strong>ASTM D1125-14:</strong> Standard Test Methods for Electrical Conductivity and Resistivity of Water. ASTM International.</span>
+            <span>Asociación Americana de Obras Hidráulicas (AWWA). (2017). <em>Water quality &amp; treatment: A handbook on drinking water</em> (6.ª ed.). McGraw-Hill.</span>
           </li>
           <li>
             <i class="ti ti-book"></i>
-            <span><strong>IEC 61215-2:</strong> Terrestrial photovoltaic (PV) modules - Design qualification and type approval - Test procedures. International Electrotechnical Commission.</span>
+            <span>Cui, M., &amp; Bhave, R. R. (2018). Challenges and strategies in developing photovoltaic cleaning systems. <em>Renewable and Sustainable Energy Reviews, 88</em>, 267–282. <a href="https://doi.org/10.1016/j.rser.2018.02.043" target="_blank" rel="noopener">https://doi.org/10.1016/j.rser.2018.02.043</a></span>
           </li>
           <li>
             <i class="ti ti-book"></i>
-            <span><strong>Skoog, D. A., West, D. M., & Holler, F. J.:</strong> Fundamentos de Química Analítica. Edición Hispanoamericana, McGraw-Hill.</span>
+            <span>Hematiyan, A., &amp; Ameri, M. (2020). Effect of water quality on solar panel surface cleaning. <em>Solar Energy, 198</em>, 44–52. <a href="https://doi.org/10.1016/j.solener.2019.12.010" target="_blank" rel="noopener">https://doi.org/10.1016/j.solener.2019.12.010</a></span>
           </li>
           <li>
             <i class="ti ti-book"></i>
-            <span><strong>NREL (National Renewable Energy Laboratory):</strong> Best Practices for Operation and Maintenance of Photovoltaic Systems.</span>
+            <span>Organización Mundial de la Salud (OMS). (2017). <em>Guías para la calidad del agua de consumo humano</em> (4.ª ed.).</span>
+          </li>
+          <li>
+            <i class="ti ti-book"></i>
+            <span>Skoog, D. A., Holler, F. J., &amp; Crouch, S. R. (2014). <em>Principios de análisis instrumental</em> (6.ª ed.). Cengage Learning.</span>
           </li>
         </ul>
       </div>
@@ -318,10 +383,12 @@
             
             <div class="team-list-container" id="team-list">
               <ul class="students-list">
-                <li><i class="ti ti-user-check"></i> René Zaim Bautista Rodríguez</li>
-                <li><i class="ti ti-user-check"></i> Integrante del Equipo de Investigación</li>
-                <li><i class="ti ti-user-check"></i> Integrante del Equipo de Investigación</li>
-                <li><i class="ti ti-user-check"></i> Integrante del Equipo de Investigación</li>
+                <li><i class="ti ti-user-check"></i> Aldany Josué Yanez Mejía</li>
+                <li><i class="ti ti-user-check"></i> Daniela Yoselin Rivera Aguilar</li>
+                <li><i class="ti ti-user-check"></i> Jessica Yadira García Guerra</li>
+                <li><i class="ti ti-user-check"></i> René Zaim Bautista Rodriguez</li>
+                <li><i class="ti ti-user-check"></i> Yuly Alejandra Chavez Castillo</li>
+                <li><i class="ti ti-user-check"></i> Shirle Yirel Mateo Mendoza</li>
               </ul>
             </div>
           </div>
@@ -330,8 +397,8 @@
           <div class="team-card professor-card">
             <div class="team-avatar prof-avatar"><i class="ti ti-school"></i></div>
             <span class="prof-badge">CATEDRÁTICA</span>
-            <h3>Docente de Asignatura</h3>
-            <p><strong>Asignatura:</strong> Química General</p>
+            <h3>MSc. Cinthia Yamileth Velázques</h3>
+            <p><strong>Asignatura:</strong> Química</p>
             <small>Universidad Nacional de Ciencias Forestales (UNACIFOR)</small>
           </div>
         </div>
