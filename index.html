@@ -24,7 +24,10 @@
 
   <!-- BARRA DE NAVEGACIÓN -->
   <nav class="site-nav" id="site-nav">
-    <a href="#hero" class="nav-brand"><i class="ti ti-droplet"></i> UNACIFOR</a>
+    <a href="#hero" class="nav-brand">
+      <i class="ti ti-droplet"></i>
+      <span class="nav-brand-text">Calidad del Agua</span>
+    </a>
     
     <div class="nav-controls">
       <!-- Toggle de Tema con Íconos Internos -->
@@ -84,7 +87,6 @@
           muted
           playsinline
           preload="metadata"
-          loop
           aria-label="Video: mecanismo de incrustación y formación de hotspots en panel solar">
           Tu navegador no soporta la reproducción de video.
         </video>
@@ -93,6 +95,9 @@
       <div class="anim-controls" role="group" aria-label="Controles del video">
         <button type="button" class="anim-btn" id="anim-play" aria-pressed="false">
           <i class="ti ti-player-play-filled"></i> Reproducir
+        </button>
+        <button type="button" class="anim-btn" id="anim-mute" aria-pressed="false">
+          <i class="ti ti-volume-off"></i> Activar sonido
         </button>
         <button type="button" class="anim-btn" id="anim-reset">
           <i class="ti ti-player-track-prev-filled"></i> Reiniciar
@@ -264,7 +269,7 @@
     <!-- SECCIÓN CONCLUSIÓN -->
     <section id="conclusion" class="section-alt">
       <div class="container">
-        <h2 class="section-title">Conclusión & Dictamen Técnico</h2>
+        <h2 class="section-title">Conclusión y Dictamen Técnico</h2>
         <div class="honesty-note">
           <i class="ti ti-circle-check-filled icon-lg" style="color: var(--teal-light);"></i>
           <div>
@@ -317,7 +322,7 @@
               <div class="team-avatar"><i class="ti ti-users"></i></div>
               <h3>Estudiantes Investigadores</h3>
               <p>Ingeniería en Energía Renovable</p>
-              <span class="tap-hint"><i class="ti ti-pointer"></i> Tocar para ver integrantes</span>
+              <span class="tap-hint"><i class="ti ti-pointer"></i> Toque para ver integrantes</span>
             </div>
             
             <div class="team-list-container" id="team-list">
@@ -336,7 +341,7 @@
           <div class="team-card professor-card">
             <div class="team-avatar prof-avatar"><i class="ti ti-school"></i></div>
             <span class="prof-badge">CATEDRÁTICA</span>
-            <h3>MSc. Cinthia Yamileth Velázques</h3>
+            <h3>MSc. Cinthia Yamileth Velásquez</h3>
             <p><strong>Asignatura:</strong> Química</p>
             <small>Universidad Nacional de Ciencias Forestales (UNACIFOR)</small>
           </div>
@@ -351,7 +356,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 UNACIFOR — Investigación en Ing. Energía Renovable y la asignatura de Química .</p>
+    <p>© 2026 UNACIFOR — Investigación en Ing. Energía Renovable y la asignatura de Química</p>
   </footer>
 
   <!-- LIGHTBOX / VISOR DE GALERÍA -->
