@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================
-  // 9. CONTROLES DEL VIDEO (PLAY / PAUSA / REINICIAR)
+  // 9. CONTROLES DEL VIDEO (PLAY / PAUSA / SONIDO / REINICIAR)
   // =========================================================
   const panelVideo = document.getElementById('mecanismo-video');
   const playBtn = document.getElementById('anim-play');
@@ -254,10 +254,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Botón de sonido: fallback manual si el navegador bloqueó el audio automático.
+  // Al ser un clic directo del usuario, los navegadores SÍ permiten activar el audio aquí,
+  // incluso si el autoplay con sonido fue bloqueado al cargar la página.
+  const muteBtn = document.getElementById('anim-mute');
+
+  function updateMuteButton(isMuted) {
+    if (!muteBtn) return;
+    muteBtn.setAttribute('aria-pressed', String(!isMuted));
+    muteBtn.innerHTML = isMuted
+      ? '<i class="ti ti-volume-off"></i> Activar sonido'
+      : '<i class="ti ti-volume"></i> Silenciar';
+  }
+
+  if (panelVideo && muteBtn) {
+    updateMuteButton(panelVideo.muted);
+    muteBtn.addEventListener('click', () => {
+      panelVideo.muted = !panelVideo.muted;
+      updateMuteButton(panelVideo.muted);
+    });
+  }
+
   // Reproducir automáticamente solo cuando la sección entra al viewport, y pausar al salir
+  let videoIsVisible = false;
+
   if (panelVideo && 'IntersectionObserver' in window) {
     const videoObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        videoIsVisible = entry.isIntersecting;
         if (entry.isIntersecting) {
           if (!manuallyPaused) {
             panelVideo.play().catch(() => {
@@ -270,6 +294,20 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, { threshold: 0.2 });
     videoObserver.observe(panelVideo);
+  }
+
+  // Al terminar el video (ya sin loop), bajamos a la siguiente sección
+  if (panelVideo) {
+    panelVideo.addEventListener('ended', () => {
+      if (!videoIsVisible) return; // el usuario ya se fue de la sección, no lo interrumpimos
+      const nextSection = document.getElementById('problema');
+      if (!nextSection) return;
+      setTimeout(() => {
+        const navHeight = siteNav ? siteNav.offsetHeight : 60;
+        const targetPosition = nextSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+      }, 1200);
+    });
   }
 
   // =========================================================
@@ -407,5 +445,32 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { passive: true });
   }
+
+  // =========================================================
+  // 12. AUTO-SCROLL DE BIENVENIDA (BAJA AL VIDEO AL ENTRAR)
+  // =========================================================
+  (function initWelcomeAutoScroll() {
+    const target = document.getElementById('mecanismo');
+    if (!target) return;
+
+    // Si el usuario entró directo a una sección específica (ej. compartieron un enlace #resultados),
+    // no lo interrumpimos bajándolo al video.
+    if (window.location.hash && window.location.hash !== '#hero') return;
+
+    let cancelled = false;
+    const cancel = () => { cancelled = true; };
+
+    // Cualquier gesto del usuario (scroll, touch, teclado) cancela el autoscroll programado
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(evt => {
+      window.addEventListener(evt, cancel, { passive: true, once: true });
+    });
+
+    setTimeout(() => {
+      if (cancelled || window.scrollY > 40) return;
+      const navHeight = siteNav ? siteNav.offsetHeight : 60;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+    }, 1500);
+  })();
 
 });
