@@ -720,3 +720,24 @@ input:checked + .slider:before {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
+
+
+/* =========================================================
+   12. MARCA DE NAVEGACIÓN RESPONSIVA
+   ========================================================= */
+.nav-brand-text {
+  line-height: 1.15;
+}
+
+@media (max-width: 480px) {
+  .nav-brand {
+    max-width: 55%;
+    align-items: flex-start;
+  }
+  .nav-brand-text {
+    display: inline-block;
+    font-size: 0.8rem;
+    white-space: normal;
+    word-break: break-word;
+  }
+}
